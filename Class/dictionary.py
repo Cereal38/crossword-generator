@@ -39,6 +39,18 @@ class Dictionary():
                          """, (word, definition))
         self.conn.commit()
     
+    def load_words(self, file_path):
+        """Load words from a text file
+        The file must be formatted as follow:
+        word1 : definition1
+        word2 : definition2
+        ...
+        """
+        with open(file_path, "r") as f:
+            for line in f:
+                word, definition = line.split(" : ")
+                self.add_word(word, definition)
+    
     def get_random_words(self, number):
         """Get a list of random words from the dictionary"""
         self.cur.execute("""
