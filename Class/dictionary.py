@@ -5,7 +5,7 @@ import sqlite3
 
 class Dictionary():
     """A class to represent a dictionary.
-    Multiple words written the same way but with different meanings can be added to the dictionary.
+    The words are the keys (can't be duplicated).
     """
 
     def __init__(self):
@@ -15,8 +15,7 @@ class Dictionary():
     def create_table(self):
         self.cur.execute("""
                          CREATE TABLE IF NOT EXISTS dictionary (
-                         id INTEGER PRIMARY KEY AUTOINCREMENT,
-                         word TEXT,
+                         word TEXT PRIMARY KEY,
                          definition TEXT
                          )
                          """)
@@ -33,11 +32,14 @@ class Dictionary():
     
     def add_word(self, word, definition):
         """Add a word to the dictionary"""
-        self.cur.execute("""
-                         INSERT INTO dictionary (word, definition)
-                         VALUES (?, ?)
-                         """, (word, definition))
-        self.conn.commit()
+        try:
+            self.cur.execute("""
+                             INSERT INTO dictionary (word, definition)
+                             VALUES (?, ?)
+                             """, (word, definition))
+            self.conn.commit()
+        except sqlite3.IntegrityError:
+            print(f"    Word '{word}' already exists")
     
     def load_words(self, file_path):
         """Load words from a text file
