@@ -1,4 +1,5 @@
 
+import os
 import sqlite3
 
 
@@ -8,7 +9,7 @@ class Dictionary():
     """
 
     def __init__(self):
-        self.conn = sqlite3.connect('dictionary.db')
+        self.conn = sqlite3.connect('db/db.sqlite')
         self.cur = self.conn.cursor()
 
     def create_table(self):
