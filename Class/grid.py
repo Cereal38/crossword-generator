@@ -49,23 +49,52 @@ class Grid():
     # Format: [(word1, definition1), (word2, definition2), ...]
     dictionary = Dictionary()
     words = dictionary.get_random_words(nb_words)
+    for word in words:
+      print(word)
 
     # Create a list to hold variables for each cell in the grid
-    # Values: 0 -> Empty, 1 -> A, 2 -> B, ...
-    cells = [[model.NewIntVar(0, 26, f'cell_{r}_{c}') for c in range(self.columns)] for r in range(self.rows)]
+    # Example: 0_0_0 -> cell in row 0, column 0 is empty
+    #          0_0_1 -> cell in row 0, column 0 contains the letter 'A'
+    #          0_0_2 -> cell in row 0, column 0 contains the letter 'B'
+    #          ...
+    cells = [ [ [model.NewBoolVar(f"{i}_{j}_{k}") for k in range(27)] for j in range(self.columns)] for i in range(self.rows)]
 
-    # Constraint 1 - Each cell must contain a letter or None
-    for row in cells:
-      for cell in row:
-        model.Add(cell >= 0)
-        model.Add(cell <= 26)
+    # ============= CONSTRAINT 1 =============
+    # EACH CELL MUST CONTAIN EXACTLY ONE LETTER OR BE EMPTY
+    for i in range(self.rows):
+      for j in range(self.columns):
+        model.Add(sum(cells[i][j]) == 1)
+
+    # ============= CONSTRAINT 2 =============
+    # ALL WORDS MUST BE IN THE GRID EXACTLY ONCE
+    # Example: word = "HELLO"
+    #          (0_0_8 AND 0_1_5 AND 0_2_12 AND 0_3_12 AND 0_4_15) OR
+    #          (0_0_8 AND 1_0_5 AND 2_0_12 AND 3_0_12 AND 4_0_15) OR
+    #          ...
+    for word in words:
+      word_str = word[0]
+      word_len = len(word_str)
+      # List of all possible positions for the word
+      # Format: [ [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4)], ... ]
+      positions = []
+      for i in range(self.rows):
+        for j in range(self.columns - word_len + 1):
+          for letter in word_str:
+            positions.append([f"{i}_{j + k}_{letter_str_to_int(letter)}" for k in range(word_len)])
+    print(positions)
+
+          
     
     # Solve
     solver = cp_model.CpSolver()
-    status = solver.Solve(model)
+    solver.Solve(model)
 
     # Fill the grid with the solution
-    for row in self.grid:
-      for box in row:
-        box.set_letter(letter_int_to_str(solver.Value(cells[box.row][box.col])))
+    for i in range(self.rows):
+      for j in range(self.columns):
+        for k in range(27):
+          if solver.Value(cells[i][j][k]) == 1:
+            self.grid[i][j].set_letter(letter_int_to_str(k))
+            break
+    
     

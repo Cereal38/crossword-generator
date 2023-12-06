@@ -1,5 +1,5 @@
 
-def letter_int_to_str(letter_int):
+def letter_int_to_str(letter_int: int) -> str:
   """Convert a letter integer to a letter string
   0 -> None
   1 -> A
@@ -11,7 +11,7 @@ def letter_int_to_str(letter_int):
   else:
     return chr(letter_int + 64)
   
-def letter_str_to_int(letter_str):
+def letter_str_to_int(letter_str: str) -> int:
   """Convert a letter string to a letter integer
   None -> 0
   A -> 1
@@ -21,5 +21,5 @@ def letter_str_to_int(letter_str):
   if letter_str is None:
     return 0
   else:
-    return ord(letter_str) - 64
+    return ord(letter_str.upper()) - 64
   
