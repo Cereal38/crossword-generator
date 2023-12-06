@@ -52,7 +52,7 @@ class Grid():
     # words = dictionary.get_random_words(nb_words)
     # for word in words:
     #   print(word)
-    words = [("HELLO", "A greeting"), ("WORLD", "The world")]
+    words = [("HELLO", "A greeting"), ("WORLD", "The world"), ("BONJOUR", "Un salut")]
 
     # Create a list to hold variables for each cell in the grid
     # Example: 0_0_0 -> cell in row 0, column 0 is empty
@@ -68,40 +68,11 @@ class Grid():
         model.Add(sum(cells[i][j]) == 1)
 
     # ============= CONSTRAINT 2 =============
-    # ALL WORDS MUST BE IN THE GRID EXACTLY ONCE
-    # Example: word = "HELLO"
-    #          (0_0_8 AND 0_1_5 AND 0_2_12 AND 0_3_12 AND 0_4_15) OR
-    #          (0_0_8 AND 1_0_5 AND 2_0_12 AND 3_0_12 AND 4_0_15) OR
-    #          ...
-    # for word in words:
-    #   word_str = word[0]
-    #   word_len = len(word_str)
-    #   # List of all possible positions for the word
-    #   positions = []
-    #   for i in range(self.rows):
-    #     for j in range(self.columns - word_len + 1):
-    #       positions.append([ (i, j + k, letter_str_to_int(word_str[k])) for k in range(word_len)])
-      
-    #   for i in range(self.columns):
-    #     for j in range(self.rows - word_len + 1):
-    #       positions.append([ (j + k, i, letter_str_to_int(word_str[k])) for k in range(word_len)])
-
-    #   # Format constraints
-    #   position_constraints = []
-    #   for position in positions:
-    #       cell_constraints = [cells[i][j][k] for (i, j, k) in position]
-    #       position_var = model.NewBoolVar('')
-    #       model.AddBoolAnd(cell_constraints).OnlyEnforceIf(position_var)
-    #       model.AddBoolOr([position_var.Not(), position_var]).OnlyEnforceIf(position_var.Not())
-    #       position_constraints.append(position_var)
-    #   model.AddBoolOr(position_constraints)
-
-    # ============= CONSTRAINT 3 =============
-    # WORDS MUST BE CONNECTED
+    # WORDS MUST BE PRESENT AND CONNECTED
     # Generate a list of couple of words that must be connected
     # Format: [ ( (index_word1, index_intersection1), (index_word2, index_intersection2) ), ... ]
     # TODO: Remove hardcoding
-    connected_words_list = [ ( (0, 3), (1, 3) ) ]
+    connected_words_list = [ ( (0, 2), (1, 3) ), ( (0, 4), (2, 4) ) ]
     for connected_words in connected_words_list:
       word1_str = words[connected_words[0][0]][0]
       word1_len = len(word1_str)
