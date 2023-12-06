@@ -80,7 +80,11 @@ class Grid():
       for i in range(self.rows):
         for j in range(self.columns - word_len + 1):
           positions.append([ (i, j + k, letter_str_to_int(word_str[k])) for k in range(word_len)])
-            
+      
+      for i in range(self.columns):
+        for j in range(self.rows - word_len + 1):
+          positions.append([ (j + k, i, letter_str_to_int(word_str[k])) for k in range(word_len)])
+
       # Format constraints
       position_constraints = []
       for position in positions:
