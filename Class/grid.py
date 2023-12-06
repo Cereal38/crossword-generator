@@ -71,25 +71,25 @@ class Grid():
     #          (0_0_8 AND 0_1_5 AND 0_2_12 AND 0_3_12 AND 0_4_15) OR
     #          (0_0_8 AND 1_0_5 AND 2_0_12 AND 3_0_12 AND 4_0_15) OR
     #          ...
-    # for word in words:
-    word_str = word[0]
-    word_len = len(word_str)
-    # List of all possible positions for the word
-    # Format: [ [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4)], ... ]
-    positions = []
-    for i in range(self.rows):
-      for j in range(self.columns - word_len + 1):
-        positions.append([ (i, j + k, letter_str_to_int(word_str[k])) for k in range(word_len)])
-          
-    # Format constraints
-    position_constraints = []
-    for position in positions:
-        cell_constraints = [cells[i][j][k] for (i, j, k) in position]
-        position_var = model.NewBoolVar('')
-        model.AddBoolAnd(cell_constraints).OnlyEnforceIf(position_var)
-        model.AddBoolOr([position_var.Not(), position_var]).OnlyEnforceIf(position_var.Not())
-        position_constraints.append(position_var)
-    model.AddBoolOr(position_constraints)
+    for word in words:
+      word_str = word[0]
+      word_len = len(word_str)
+      # List of all possible positions for the word
+      # Format: [ [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4)], ... ]
+      positions = []
+      for i in range(self.rows):
+        for j in range(self.columns - word_len + 1):
+          positions.append([ (i, j + k, letter_str_to_int(word_str[k])) for k in range(word_len)])
+            
+      # Format constraints
+      position_constraints = []
+      for position in positions:
+          cell_constraints = [cells[i][j][k] for (i, j, k) in position]
+          position_var = model.NewBoolVar('')
+          model.AddBoolAnd(cell_constraints).OnlyEnforceIf(position_var)
+          model.AddBoolOr([position_var.Not(), position_var]).OnlyEnforceIf(position_var.Not())
+          position_constraints.append(position_var)
+      model.AddBoolOr(position_constraints)
     
     # Solve
     solver = cp_model.CpSolver()
