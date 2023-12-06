@@ -71,17 +71,19 @@ class Grid():
     #          (0_0_8 AND 0_1_5 AND 0_2_12 AND 0_3_12 AND 0_4_15) OR
     #          (0_0_8 AND 1_0_5 AND 2_0_12 AND 3_0_12 AND 4_0_15) OR
     #          ...
-    for word in words:
-      word_str = word[0]
-      word_len = len(word_str)
-      # List of all possible positions for the word
-      # Format: [ [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4)], ... ]
-      positions = []
-      for i in range(self.rows):
-        for j in range(self.columns - word_len + 1):
-          for letter in word_str:
-            positions.append([f"{i}_{j + k}_{letter_str_to_int(letter)}" for k in range(word_len)])
-    print(positions)
+    # for word in words:
+    word_str = word[0]
+    word_len = len(word_str)
+    # List of all possible positions for the word
+    # Format: [ [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4)], ... ]
+    positions = []
+    for i in range(self.rows):
+      for j in range(self.columns - word_len + 1):
+        positions.append([ f"{i}_{j + k}_{letter_str_to_int(word_str[k])}" for k in range(word_len)])
+          
+    # Add the constraint
+    for rule in positions:
+      print(rule)
 
           
     
