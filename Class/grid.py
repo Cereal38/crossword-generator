@@ -79,24 +79,30 @@ class Grid():
     positions = []
     for i in range(self.rows):
       for j in range(self.columns - word_len + 1):
-        positions.append([ f"{i}_{j + k}_{letter_str_to_int(word_str[k])}" for k in range(word_len)])
+        positions.append([ (i, j + k, letter_str_to_int(word_str[k])) for k in range(word_len)])
           
-    # Add the constraint
-    for rule in positions:
-      print(rule)
-
-          
+    # Format constraints
+    position_constraints = []
+    for position in positions:
+        cell_constraints = [cells[i][j][k] for (i, j, k) in position]
+        position_var = model.NewBoolVar('')
+        model.AddBoolAnd(cell_constraints).OnlyEnforceIf(position_var)
+        model.AddBoolOr([position_var.Not(), position_var]).OnlyEnforceIf(position_var.Not())
+        position_constraints.append(position_var)
+    model.AddBoolOr(position_constraints)
     
     # Solve
     solver = cp_model.CpSolver()
-    solver.Solve(model)
-
-    # Fill the grid with the solution
-    for i in range(self.rows):
-      for j in range(self.columns):
-        for k in range(27):
-          if solver.Value(cells[i][j][k]) == 1:
-            self.grid[i][j].set_letter(letter_int_to_str(k))
-            break
+    status = solver.Solve(model)
+    if status == cp_model.FEASIBLE:
+      print("No solution found.")
+    else:
+      # Fill the grid with the solution
+      for i in range(self.rows):
+        for j in range(self.columns):
+          for k in range(27):
+            if solver.Value(cells[i][j][k]) == 1:
+              self.grid[i][j].set_letter(letter_int_to_str(k))
+              break
     
     
