@@ -4,6 +4,7 @@ from ortools.sat.python import cp_model
 
 from Class.box import Box
 from Class.dictionary import Dictionary
+from Tools.letters import letter_int_to_str, letter_str_to_int
 
 
 class Grid():
@@ -62,4 +63,9 @@ class Grid():
     # Solve
     solver = cp_model.CpSolver()
     status = solver.Solve(model)
+
+    # Fill the grid with the solution
+    for row in self.grid:
+      for box in row:
+        box.set_letter(letter_int_to_str(solver.Value(cells[box.row][box.col])))
     
