@@ -48,11 +48,11 @@ class Grid():
     # Get words from the database
     # Format: [(word1, definition1), (word2, definition2), ...]
     # TODO: Remove hardcoding
-    # dictionary = Dictionary()
-    # words = dictionary.get_random_words(nb_words)
-    # for word in words:
-    #   print(word)
-    words = [("HELLO", "A greeting"), ("WORLD", "The world"), ("DINOSAUR", "A big lizard")]
+    dictionary = Dictionary()
+    words = dictionary.get_random_words(nb_words)
+    for word in words:
+      print(word)
+    # words = [("HELLO", "A greeting"), ("WORLD", "The world"), ("PYTHON", "Blabla")]
 
     # Create a list to hold variables for each cell in the grid
     # Example: 0_0_0 -> cell in row 0, column 0 is empty
@@ -112,7 +112,7 @@ class Grid():
     number_of_letters_in_words = sum([len(word[0]) for word in words])
     number_of_words = len(words)
     # We check if the number of values different than [i][j][0] is correct
-    model.Add(sum([sum([sum(cells[i][j][1:]) for j in range(self.columns)]) for i in range(self.rows)]) <= number_of_letters_in_words - (number_of_words - 1))
+    model.Add(sum([sum([sum(cells[i][j][1:]) for j in range(self.columns)]) for i in range(self.rows)]) == number_of_letters_in_words - (number_of_words - 1))
 
     # Solve
     solver = cp_model.CpSolver()
