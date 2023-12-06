@@ -56,7 +56,7 @@ class Dictionary():
     def get_random_words(self, number):
         """Get a list of random words from the dictionary"""
         self.cur.execute("""
-                         SELECT word FROM dictionary
+                         SELECT word, definition FROM dictionary
                          ORDER BY RANDOM()
                          LIMIT ?
                          """, (number,))

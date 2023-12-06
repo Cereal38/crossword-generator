@@ -1,6 +1,9 @@
 import random as rd
 
+from ortools.sat.python import cp_model
+
 from Class.box import Box
+from Class.dictionary import Dictionary
 
 
 class Grid():
@@ -34,3 +37,29 @@ class Grid():
         else:
           print(" ", end=" ")
       print()
+  
+  def generate_grid(self, nb_words):
+    """Generate the grid using constraints programming"""
+    
+    # Create the model
+    model = cp_model.CpModel()
+
+    # Get words from the database
+    # Format: [(word1, definition1), (word2, definition2), ...]
+    dictionary = Dictionary()
+    words = dictionary.get_random_words(nb_words)
+
+    # Create a list to hold variables for each cell in the grid
+    # Values: 0 -> Empty, 1 -> A, 2 -> B, ...
+    cells = [[model.NewIntVar(0, 26, f'cell_{r}_{c}') for c in range(self.columns)] for r in range(self.rows)]
+
+    # Constraint 1 - Each cell must contain a letter or None
+    for row in cells:
+      for cell in row:
+        model.Add(cell >= 0)
+        model.Add(cell <= 26)
+    
+    # Solve
+    solver = cp_model.CpSolver()
+    status = solver.Solve(model)
+    
