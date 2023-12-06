@@ -104,14 +104,25 @@ class Grid():
           model.AddBoolOr([position_var.Not(), position_var]).OnlyEnforceIf(position_var.Not())
           position_constraints.append(position_var)
       model.AddBoolOr(position_constraints)
+  
+    # ============= CONSTRAINT 3 =============
+    # ALL WORDS MUST INTERSECT
+    # We check if :
+    # <Number of letters in the grid> == <Number of letters in all words> - <Number of words> - 1
+    number_of_letters_in_words = sum([len(word[0]) for word in words])
+    number_of_words = len(words)
+    # We check if the number of values different than [i][j][0] is correct
+    model.Add(sum([sum([sum(cells[i][j][1:]) for j in range(self.columns)]) for i in range(self.rows)]) == number_of_letters_in_words - number_of_words + 1)
 
     # Solve
     solver = cp_model.CpSolver()
     status = solver.Solve(model)
-    if status == cp_model.FEASIBLE:
+    if status == cp_model.INFEASIBLE:
       print("No solution found.")
+    elif status == cp_model.UNKNOWN:
+      print("The solver could not determine if a solution exists.")
     else:
-      # Fill the grid with the solution
+       # Fill the grid with the solution
       for i in range(self.rows):
         for j in range(self.columns):
           for k in range(27):
