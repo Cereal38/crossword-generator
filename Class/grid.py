@@ -69,6 +69,7 @@ class Grid():
 
     # ============= CONSTRAINT 2 =============
     # ALL WORDS MUST BE IN THE GRID EXACTLY ONCE
+    # (We also check if cells preceding and following a word are empty)
     # Example: word = "HELLO"
     #          (0_0_8 AND 0_1_5 AND 0_2_12 AND 0_3_12 AND 0_4_15) OR
     #          (0_0_8 AND 1_0_5 AND 2_0_12 AND 3_0_12 AND 4_0_15) OR
@@ -82,11 +83,23 @@ class Grid():
       for i in range(self.rows):
         for j in range(self.columns - word_len + 1):
           positions.append([ (i, j + k, letter_str_to_int(word_str[k])) for k in range(word_len)])
+          # Check if the cell preceding the word is empty
+          if j > 0:
+            positions[-1].append((i, j - 1, 0))
+          # Check if the cell following the word is empty
+          if j + word_len < self.columns:
+            positions[-1].append((i, j + word_len, 0))
       
       # Vertical positions
       for i in range(self.columns):
         for j in range(self.rows - word_len + 1):
           positions.append([ (j + k, i, letter_str_to_int(word_str[k])) for k in range(word_len)])
+          # Check if the cell preceding a letter is empty
+          if j > 0:
+            positions[-1].append((j - 1, i, 0))
+          # Check if the cell following a letter is empty
+          if j + word_len < self.rows:
+            positions[-1].append((j + word_len, i, 0))
 
       # Format constraints
       temp_constraints = []
@@ -96,12 +109,7 @@ class Grid():
           model.AddBoolAnd([cells[i][j][k] for (i, j, k) in position]).OnlyEnforceIf(new_bool_var)
 
       # XOR constraint
-      model.Add(sum(temp_constraints) == 1)
-
-      # for constraint in temp_constraints:
-      #   model.AddBoolOr([constraint] + [cells[i][j][0] for (i, j, k) in position]).OnlyEnforceIf(constraint)
-      #   model.AddBoolOr([constraint] + [cells[i][j][k] for (i, j, k) in position]).OnlyEnforceIf(constraint.Not())
-          
+      model.Add(sum(temp_constraints) == 1)          
   
     # # ============= CONSTRAINT 3 =============
     # # ALL WORDS MUST INTERSECT
@@ -129,9 +137,6 @@ class Grid():
         model.AddBoolOr([cells[i][j-1][0], cells[i+1][j-1][0], cells[i+1][j][0]]).OnlyEnforceIf(cells[i][j][0].Not())
         model.AddBoolOr([cells[i-1][j][0], cells[i-1][j-1][0], cells[i][j-1][0]]).OnlyEnforceIf(cells[i][j][0].Not())
 
-    # # ============= CONSTRAINT 5 =============
-    # # THE CELL NEXT TO THE END OF A WORD MUST BE EMPTY
-
     # Solve
     solver = cp_model.CpSolver()
     status = solver.Solve(model)
@@ -148,5 +153,4 @@ class Grid():
             if solver.Value(cells[i][j][k]) == 1:
               self.grid[i][j].set_letter(letter_int_to_str(k))
               break
-    
     
