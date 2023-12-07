@@ -24,6 +24,20 @@ class Grid():
       return len(self.grid[0])
     else:
       return 0
+  
+  def add_rows(self, nb_rows: int = 1, position: str = "end"):
+    """Add rows to the grid
+    :param nb_rows: Number of rows to add (default: 1)
+    :param position: Position of the rows to add - "start" or "end" (default "end")
+    """
+    if position == "end":
+      for i in range(nb_rows):
+        self.grid.append([ Cell() for i in range(self.columns()) ])
+    elif position == "start":
+      for i in range(nb_rows):
+        self.grid.insert(0, [ Cell() for i in range(self.columns()) ])
+    else:
+      raise ValueError("Position must be 'start' or 'end'")
 
   def display_cli(self):
     """Display the grid in the command line"""
