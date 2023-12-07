@@ -59,36 +59,65 @@ class Grid():
     else:
       raise ValueError("Position must be 'start' or 'end'")
   
+  def remove_rows(self, nb_rows: int = 1, position: str = "end"):
+    """Remove rows from the grid
+    :param nb_rows: Number of rows to remove (default: 1)
+    :param position: Position of the rows to remove - "start" or "end" (default "end")
+    """
+    if position == "end":
+      for i in range(nb_rows):
+        self.grid.pop()
+    elif position == "start":
+      for i in range(nb_rows):
+        self.grid.pop(0)
+    else:
+      raise ValueError("Position must be 'start' or 'end'")
+    
+  def remove_columns(self, nb_columns: int = 1, position: str = "end"):
+    """Remove columns from the grid
+    :param nb_columns: Number of columns to remove (default: 1)
+    :param position: Position of the columns to remove - "start" or "end" (default "end")
+    """
+    if position == "end":
+      for row in self.grid:
+        for i in range(nb_columns):
+          row.pop()
+    elif position == "start":
+      for row in self.grid:
+        for i in range(nb_columns):
+          row.pop(0)
+    else:
+      raise ValueError("Position must be 'start' or 'end'")
+  
   def set_word(self, word: str, row: int, column: int, direction: str):
     """Set a word in the grid
-    /!\ The grid automatically grows if the word is too long
     :param word: Word to set
     :param row: Row id (first letter)
     :param column: Column if (first letter)
     :param direction: Direction of the word - "horizontal" or "vertical"
     """
-    # If the word is too long, grow the grid
-    if direction == "horizontal":
-      if column + len(word) > self.columns():
-        # If the grid is empty, add a row
-        if self.rows() == 0:
-          self.add_rows()
-        self.add_columns(column + len(word) - self.columns())
-    elif direction == "vertical":
-      if row + len(word) > self.rows():
-        self.add_rows(row + len(word) - self.rows())
-        # If the grid was empty, add a column
-        if self.columns() == 0:
-          self.add_columns()
-    else:
-      raise ValueError("Direction must be 'horizontal' or 'vertical'")
-    
+    # # If the word is too long, grow the grid
+    # if direction == "horizontal":
+    #   if column + len(word) > self.columns():
+    #     # If the grid is empty, add a row
+    #     if self.rows() == 0:
+    #       self.add_rows()
+    #     self.add_columns(column + len(word) - self.columns())
+    # elif direction == "vertical":
+    #   if row + len(word) > self.rows():
+    #     self.add_rows(row + len(word) - self.rows())
+    #     # If the grid was empty, add a column
+    #     if self.columns() == 0:
+    #       self.add_columns()
+
     # Set the word
     for i in range(len(word)):
       if direction == "horizontal":
         self.grid[row][column + i].set_letter(word[i])
       elif direction == "vertical":
         self.grid[row + i][column].set_letter(word[i])
+      else:
+        raise ValueError("Direction must be 'horizontal' or 'vertical'")
     
 
   def display_cli(self):

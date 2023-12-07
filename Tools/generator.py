@@ -2,6 +2,8 @@
 import random as rd
 from copy import deepcopy
 
+INITIAL_GRID_SIZE = 100
+
 
 class WordsAdded():
   """WordsAdded class
@@ -86,6 +88,27 @@ def word_can_be_added(word: str, row: int, column: int, direction: str, grid) ->
   
   return True
 
+def reduce_grid(grid):
+  """Remove all useless rows and cols from the grid"""
+  first_row_index = INITIAL_GRID_SIZE - 1
+  last_row_index = 0
+  first_col_index = INITIAL_GRID_SIZE - 1
+  last_col_index = 0
+
+  # Find all interesting indexes
+  for i in range(grid.rows()):
+    for j in range(grid.columns()):
+      if grid.grid[i][j].get_letter() is not None:
+        first_row_index = min(first_row_index, i)
+        last_row_index = max(last_row_index, i)
+        first_col_index = min(first_col_index, j)
+        last_col_index = max(last_col_index, j)
+  
+  # Remove useless rows
+  grid.remove_rows(grid.rows() - last_row_index - 1, "end")
+  grid.remove_rows(first_row_index, "start")
+  grid.remove_columns(grid.columns() - last_col_index - 1, "end")
+  grid.remove_columns(first_col_index, "start")
 
 def generate(grid, words: list):
   """Generate the grid with given words"""
@@ -96,25 +119,28 @@ def generate(grid, words: list):
   words_copy = deepcopy(words)
 
   grid.reset()
+  grid.add_rows(INITIAL_GRID_SIZE)
+  grid.add_columns(INITIAL_GRID_SIZE)
 
   words_added = WordsAdded()
 
-  # Add the longest word to the grid
+  # Add the longest word to the grid (at the middle)
   longest_word = pop_longest_word(words_copy)
   direction = rd.choice(["horizontal", "vertical"])
-  grid.set_word(longest_word[0], 0, 0, direction)
-  words_added.add(longest_word[0], 0, 0, direction)
+  grid.set_word(longest_word[0], INITIAL_GRID_SIZE // 2, INITIAL_GRID_SIZE // 2, direction)
+  words_added.add(longest_word[0], INITIAL_GRID_SIZE // 2, INITIAL_GRID_SIZE // 2, direction)
 
   # Add the other words to the grid
   while len(words_copy) > 0:
-    current_word = pop_longest_word(words_copy)
-    print(current_word)
 
+    current_word = pop_longest_word(words_copy)
+
+    # Check each word already added to the grid and "join" the first that match
     for word in words_added.get_words():
       matching_letters = matching_words(current_word[0], word)
       rd.shuffle(matching_letters)
-      print(matching_letters)
 
+      # Check if the word can be added to the grid at the matching letter position
       if len(matching_letters) > 0:
         for matching_letter in matching_letters:
 
@@ -127,5 +153,6 @@ def generate(grid, words: list):
             grid.set_word(current_word[0], new_word_row, new_word_column, new_word_direction)
             words_added.add(current_word[0], new_word_row, new_word_column, new_word_direction)
             break
-      
+  
+  reduce_grid(grid)
 
