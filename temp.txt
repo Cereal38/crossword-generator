@@ -1,0 +1,930 @@
+my : Belonging to me
+no : Negative response
+we : Referring to a group
+is : Present tense of "to be"
+go : Move from one place to another
+up : Toward a higher position
+so : In such a way
+it : Referring to something previously mentioned
+by : Next to or near
+if : On the condition that
+all : The entire quantity
+are : Exist or be found
+art : Creative expression
+aim : Goal or objective
+bat : Flying mammal
+big : Large in size
+box : Container
+car : Vehicle
+cat : Feline animal
+cry : Shedding tears
+cup : Drinking vessel
+cut : Divide or separate
+day : A 24-hour period
+dog : Loyal pet
+dry : Free from moisture
+eat : Consume food
+egg : Oval reproductive body
+eye : Organ for seeing
+fan : Air-moving device
+fly : Insect with wings
+fun : Enjoyment or amusement
+gap : Space between objects
+get : Obtain or receive
+hit : Strike or impact
+hot : High in temperature
+ice : Frozen water
+ink : Pigmented liquid
+job : Task or occupation
+joy : Feeling of happiness
+key : Object used to open
+low : Not high in position
+map : Diagram of an area
+mix : Combine or blend
+now : At this very moment
+off : Not on or in use
+old : Not young
+one : The number 1
+out : Not inside
+pen : Writing instrument
+pie : Baked dish with filling
+pig : Swine animal
+pot : Cooking container
+red : Color of blood
+run : Move quickly
+say : Express in words
+sea : Body of saltwater
+see : Perceive with eyes
+set : Collection of items
+she : Female person
+sky : Celestial expanse
+son : Male child
+sun : Star at center of solar system
+tap : Device for water flow
+tea : Beverage made from leaves
+top : Highest point
+try : Attempt or endeavor
+two : The number 2
+use : Utilize or employ
+war : Conflict between nations
+wet : Moist or damp
+win : Achieve victory
+zip : Fastener for closing
+zoo : Place with captive animals
+able : Capable
+acid : Sour solution
+anti : Opposed to
+apex : Highest point
+aqua : Water color
+arch : Curved structure
+area : Surface area
+atom : Basic unit
+auto : Car, vehicle
+barn : Farm building
+beam : Ray of light
+beta : Second in rank
+bind : Secure tightly
+bird : Flying creature
+blue : Color of sky
+boat : Watercraft
+body : Physical form
+bolt : Fastener
+bone : Skeletal part
+book : Written work
+born : Brought into life
+bowl : Rounded container
+brim : Edge of a hat
+burn : Combustion
+bury : Put in ground
+busy : Occupied
+cast : Throw forcefully
+clay : Malleable earth
+clip : Fasten together
+coal : Fossil fuel
+cold : Low temperature
+come : Approach
+cope : Deal with
+cord : Thin rope
+corn : Edible grain
+cure : Treatment
+curl : Twisted shape
+dare : Courageous act
+dart : Quick movement
+dash : Fast run
+date : Calendar day
+dawn : Early morning
+deck : Ship's floor
+deep : Far down
+deny : Refuse
+dice : Cubic objects
+dirt : Earth, soil
+disc : Circular object
+disk : Storage device
+dive : Jump into water
+doom : Terrible fate
+dusk : Evening time
+dust : Fine particles
+earn : Gain through work
+east : Direction
+echo : Sound reflection
+edge : Outer boundary
+envy : Jealousy
+ever : Always
+fade : Gradually disappear
+fall : Descend downward
+farm : Agricultural land
+fast : Quick
+fear : Feeling of dread
+fire : Combustion
+fish : Aquatic creature
+flag : Symbol of a nation
+flea : Parasitic insect
+foam : Bubbles on liquid
+fork : Eating utensil
+form : Shape or structure
+free : Not constrained
+fuel : Energy source
+gain : Obtain, acquire
+game : Playful activity
+gift : Present
+glow : Emit light
+goal : Objective
+grin : Wide smile
+grow : Increase in size
+gulf : Large body of water
+hair : Head covering
+half : One part of two
+hand : Body part
+hard : Difficult
+harm : Injury or damage
+heal : Recover from injury
+hero : Courageous figure
+hope : Optimistic feeling
+huge : Very large
+hurt : Cause pain
+idea : Thought or concept
+inch : Measurement unit
+iron : Metal element
+jazz : Music style
+jest : Joke or prank
+join : Connect together
+jolt : Sudden movement
+junk : Trash or garbage
+keep : Maintain possession
+kick : Strike with foot
+kind : Caring, gentle
+kiss : Touch with lips
+knit : Make fabric
+know : Have knowledge
+lamp : Light source
+last : Final
+leaf : Plant part
+left : Opposite of right
+life : Existence
+lift : Raise up
+like : Similar to
+line : Straight mark
+link : Connect together
+lion : Large feline
+list : Series of items
+live : Be alive
+lock : Fasten securely
+long : Extended distance
+loop : Circular shape
+lose : Fail to keep
+love : Deep affection
+luck : Chance or fortune
+make : Create
+mass : Large quantity
+maze : Complex network
+mild : Gentle in nature
+mist : Fine water droplets
+moon : Earth's satellite
+muse : Source of inspiration
+nail : Pointed fastener
+name : Designation
+neat : Tidy, organized
+nest : Bird's home
+nice : Pleasing
+nose : Facial feature
+note : Short message
+oven : Cooking appliance
+over : Above, finished
+pace : Speed of movement
+pain : Physical suffering
+palm : Inner hand
+part : Section or piece
+pass : Go by
+peak : Highest point
+pear : Fruit with seeds
+plan : Strategy
+play : Engage in fun
+plot : Sequence of events
+plug : Electrical connector
+plum : Round fruit
+poem : Literary work
+pole : Long, slender rod
+pool : Small body of water
+post : Display publicly
+pour : Flow rapidly
+pull : Exert force
+pump : Mechanical device
+pure : Untainted
+push : Apply force
+race : Contest of speed
+raft : Simple boat
+rail : Bar for support
+rain : Precipitation
+rake : Gardening tool
+real : Genuine
+reap : Harvest
+rest : Relaxation
+ride : Travel by vehicle
+ring : Circular jewelry
+rise : Ascend
+risk : Chance of danger
+road : Path for vehicles
+rock : Solid mineral
+roll : Rotate
+rope : Strong cord
+ruin : Destroy
+rule : Governing principle
+rust : Corrosion
+safe : Secure, protected
+sail : Travel by wind
+salt : Mineral seasoning
+sand : Granular material
+save : Preserve, protect
+saw : Cutting tool
+scan : Examine closely
+seal : Close tightly
+seek : Search for
+seed : Plant reproductive part
+self : Individual
+send : Dispatch
+shoe : Footwear
+shop : Retail store
+shot : Projectile
+shut : Close tightly
+sick : Ill, unwell
+side : Edge, boundary
+silk : Fine fabric
+sink : Descend in water
+site : Location
+size : Measurement
+skin : Outer covering
+slam : Close violently
+slow : Not fast
+snap : Break quickly
+snow : Frozen precipitation
+soft : Not hard
+soil : Earth, ground
+song : Musical composition
+soon : In a short time
+sour : Acidic taste
+star : Celestial body
+stay : Remain in place
+step : Move foot
+stop : Cease activity
+suit : Formal attire
+sure : Certain, confident
+swim : Move in water
+tail : Rear end
+take : Acquire
+tale : Story
+tend : Care for
+test : Examination
+text : Written words
+thin : Not thick
+tick : Small sound
+tide : Ocean movement
+tiny : Very small
+tire : Rubber equipment
+toad : Amphibian
+toll : Charge for service
+tool : Implement
+town : Urban area
+tram : Passenger vehicle
+trap : Catch, ensnare
+tree : Woody plant
+trip : Journey
+tune : Melody
+turn : Rotate, change direction
+twig : Small branch
+type : Category
+undo : Reverse
+unit : Individual part
+vast : Very large
+vent : Opening for air
+verb : Word class
+vest : Sleeveless garment
+void : Empty space
+vote : Express an opinion
+wage : Payment for work
+wait : Delay action
+wake : Emerge from sleep
+walk : Move on foot
+warm : Not cold
+wart : Small growth
+wave : Oscillating motion
+weak : Not strong
+wear : Put on clothing
+weep : Cry
+west : Direction
+whip : Strike with force
+wide : Spacious
+wild : Uncultivated
+will : Determination
+wind : Moving air
+wine : Alcoholic beverage
+wish : Desire
+wood : Hard material
+word : Linguistic unit
+work : Effort, labor
+zero : No quantity
+zone : Area with distinct feature
+amber : Fossilized resin
+angel : Heavenly being
+apple : Fruit
+asset : Valuable possession
+bloom : Flowering stage
+bluff : Deceptive act
+brief : Short in duration
+brisk : Energetic
+cabin : Small house
+candy : Sweet treat
+charm : Appeal
+chess : Strategic board game
+child : Young human
+clamp : Holding tool
+clang : Loud sound
+clean : Free from dirt
+cliff : Steep rock face
+cling : Hold tight
+clown : Circus performer
+cocoa : Chocolate ingredient
+comma : Punctuation mark
+couch : Sofa
+crown : Royal headgear
+crust : Outer layer
+daisy : Flower
+debut : First appearance
+ditch : Shallow trench
+doula : Birth coach
+drown : Die from inhaling water
+eagle : Bird of prey
+elbow : Joint in the arm
+ember : Glowing coal
+epoch : Period of time
+essay : Written composition
+ether : Invisible substance
+fable : Short moral story
+faint : Lose consciousness
+fault : Mistake
+feast : Large meal
+fever : Elevated body temperature
+flood : Overflow of water
+fluid : Liquid substance
+frost : Frozen condensation
+giant : Huge in size
+glove : Hand covering
+grape : Small fruit
+grass : Plant covering
+graze : Feed on grass
+grove : Small group of trees
+guest : Visitor
+hatch : Incubate
+haunt : Visit often
+heath : Open wasteland
+hinge : Jointed device
+honey : Sweet substance
+hymn : Religious song
+ideal : Perfect
+image : Visual representation
+juice : Liquid from fruit
+jumbo : Very large
+knack : Special skill
+knees : Bending joints
+lavas : Eruptions of molten rock
+lucky : Fortunate
+lunge : Forward thrust
+marsh : Wetland
+medal : Award for achievement
+mercy : Compassion
+merry : Happy
+mirth : Amusement
+misty : Hazy, foggy
+modal : Related to mode
+motel : Lodging for motorists
+navel : Belly button
+noble : Honorable
+oasis : Fertile spot in a desert
+olive : Small fruit
+opera : Theatrical performance
+organ : Body part
+paint : Coloring substance
+party : Social gathering
+pearl : Precious gem
+piano : Musical instrument
+plaza : Public square
+proud : Feeling of accomplishment
+pulse : Beat or throb
+puppy : Young dog
+quiet : Silent
+quote : Repeat exactly
+quilt : Thick bed covering
+radar : Detection system
+razor : Shaving tool
+realm : Kingdom or domain
+rival : Competitor
+salad : Mixed greens
+scale : Measuring device
+sauce : Flavoring liquid
+scarf : Neck accessory
+scone : Baked pastry
+shade : Shadow
+sharp : Pointed
+sheep : Woolly animal
+shine : Give off light
+shock : Sudden surprise
+sleek : Smooth and glossy
+sling : Throw forcefully
+slope : Incline
+smile : Facial expression
+snack : Light meal
+sneak : Move stealthily
+spice : Flavoring substance
+spill : Accidental overflow
+spoon : Eating utensil
+steel : Strong metallic material
+stove : Cooking appliance
+straw : Thin tube for drinking
+sweat : Moisture from pores
+tweet : Short message on Twitter
+udder : Milk-producing organ
+unite : Join together
+urban : Related to city
+usher : Guide or escort
+valor : Courage
+vault : Secure room
+vivid : Bright and lively
+vowel : Speech sound
+waltz : Ballroom dance
+whale : Large marine mammal
+witty : Clever and humorous
+yacht : Recreational boat
+young : Not old
+across : From one side to another
+addict : Habitual user
+anchor : Heavy metal object
+artist : Creative person
+ballet : Dance form
+banana : Yellow fruit
+bangle : Ornamental bracelet
+barrel : Cylindrical container
+beacon : Signal light
+beauty : Physical attractiveness
+bishop : Chess piece
+blouse : Loose-fitting top
+border : Boundary line
+bottle : Container with narrow neck
+breeze : Gentle wind
+bridal : Related to a wedding
+bronze : Copper alloy
+bucket : Open container
+burden : Heavy load
+camera : Photography device
+canvas : Strong fabric
+carrot : Orange vegetable
+carve  : Sculpt or cut
+castle : Fortress
+chaos  : Disorder
+cherry : Small fruit
+choice : Selection
+chrome : Metallic element
+cinema : Movie theater
+circle : Round shape
+climax : Highest point
+coffee : Hot beverage
+comedy : Humorous entertainment
+copper : Metallic element
+coral  : Marine organism
+cosmic : Relating to the universe
+cradle : Baby's bed
+crayon : Coloring tool
+create : Make or fabricate
+cruise : Vacation at sea
+curfew : Time restriction
+dagger : Short stabbing weapon
+dancer : Performer of dance
+debate : Formal discussion
+desire : Strong wish
+device : Tool or gadget
+diesel : Fuel for engines
+donate : Give for a cause
+dragon : Mythical creature
+drawer : Storage compartment
+dreamy : Unreal or imaginative
+drench : Soak completely
+drove  : Herd or group
+eagle  : Bird of prey
+effect : Result or consequence
+effort : Physical or mental endeavor
+elapse : Pass by
+emblem : Symbol or sign
+emerge : Come out or appear
+empire : Large territory
+energy : Power or vitality
+engine : Mechanical device
+enrich : Improve or enhance
+equity : Fairness or justice
+escape : Get away
+expose : Reveal or uncover
+fabric : Textile material
+factor : Contributing element
+falcon : Bird of prey
+family : Group of relatives
+farmer : Agricultural worker
+fathom : Understand or measure
+fierce : Intense or ferocious
+fillet : Boneless meat or fish
+finish : Complete or end
+flavor : Taste or seasoning
+flower : Blooming plant
+fossil : Preserved remains
+friend : Close companion
+frugal : Economical or thrifty
+fungus : Plant-like organism
+future : Time yet to come
+gadget : Small electronic device
+garden : Outdoor space for plants
+genius : Exceptional intelligence
+guitar : Stringed musical instrument
+hammer : Tool for pounding
+handle : Grip or manage
+harbor : Sheltered port
+helmet : Protective headgear
+honest : Truthful or sincere
+humble : Modest or unassuming
+hunter : One who hunts
+immune : Resistant to disease
+impact : Strong effect
+island : Land surrounded by water
+jigsaw : Puzzle with irregular pieces
+journal : Record of events
+jungle : Dense forest
+karate : Martial art
+keeper : Person who guards or cares for something
+kitten : Young cat
+laptop : Portable computer
+lawyer : Legal professional
+legend : Traditional story
+lesson : Educational instruction
+linens : Household fabrics
+liquid : State of matter
+lizard : Reptile
+lounge : Comfortable seating area
+lumber : Wood material
+magnet : Attracts metal
+maple  : Tree or its wood
+mascot : Symbolic figure
+master : Expert or skilled
+mature : Fully developed
+meadow : Grassland
+modest : Humble or unassuming
+mosaic : Decorative artwork
+motion : Movement or gesture
+museum : Cultural institution
+muscle : Body tissue
+myriad : Countless number
+nectar : Sweet plant secretion
+needle : Sewing tool
+nephew : Brother's son
+nighty : Nightdress or nightgown
+noodle : Long thin pasta
+notion : Idea or belief
+novice : Beginner or learner
+nugget : Small piece or chunk
+oasis  : Fertile spot in a desert
+object : Physical thing
+offend : Cause displeasure
+oliver : Variant of olive
+origin : Starting point
+outfit : Clothing ensemble
+paddle : Oar or flat blade
+palace : Royal residence
+parcel : Package or small package
+parrot : Colorful bird
+pastel : Light and pale colors
+pathos : Appeal to emotion
+pickle : Preserved vegetable
+pirate : Sea robber
+planet : Celestial body
+player : Participant in a game
+pledge : Promise or commitment
+plunge : Dive or immerse
+poetry : Literary form
+pointer : Indicator or guide
+poodle : Breed of dog
+poster : Visual advertisement
+prayer : Religious communication
+preach : Deliver a sermon
+precis : Summary
+prey   : Hunted animal
+price  : Cost or value
+public : Open to all
+purple : Color
+python : Large snake
+quaint : Attractive or charming
+quarry : Excavation site
+quest  : Search or pursuit
+quote  : Repeat exactly
+rabbit : Small mammal
+radish : Root vegetable
+rarely : Not often
+razor  : Shaving tool
+recess : Break or pause
+record : Document or audio
+refund : Reimbursement
+regime : Political system
+region : Area or district
+repair : Fix or mend
+report : Informative document
+repose : State of rest
+result : Outcome or consequence
+revere : Show deep respect
+ribbon : Decorative strip
+rocket : Spacecraft
+saddle : Seat for riding
+sample : Example
+savior : Rescuer or deliverer
+scarce : Insufficient in quantity
+scheme : Plan or strategy
+sculpt : Create sculpture
+search : Look for
+secure : Safe or protected
+sensor : Detecting device
+shadow : Dark area behind an object
+sherpa : Himalayan mountain guide
+shower : Rainfall
+shrine : Sacred place
+singer : Vocalist
+smoker : Person who smokes
+snatch : Grab quickly
+sneaky : Stealthy or devious
+soccer : Football game
+soothe : Calm or comfort
+source : Origin or beginning
+speech : Verbal expression
+sphere : Ball or globe
+sphinx : Mythical creature
+spirit : Ethereal essence
+splash : Scatter liquid
+sprout : Young plant
+sprint : Run at full speed
+stable : Secure or not changing
+staple : Essential item
+static : Inactive or stationary
+steady : Firm or constant
+stereo : Sound system
+stirke : Hit forcefully
+strive : Make great efforts
+studio : Workroom for artists
+sturdy : Strong and robust
+subtle : Not obvious or direct
+substr : Layer beneath another
+sugary : Sweet or syrupy
+summer : Warm season
+sunset : End of the day
+surely : Certainly or definitely
+survey : Study or examination
+tablet : Portable computer
+tackle : Equipment for a task
+target : Objective or goal
+tassel : Decorative hanging
+tattoo : Permanent body art
+tawny  : Light brown
+teddy  : Stuffed toy bear
+tennis : Racket sport
+terror : Extreme fear
+theory : Hypothetical explanation
+thrill : Excitement
+thrive : Flourish or prosper
+timber : Wood used in construction
+tomato : Red vegetable
+tongue : Organ of taste
+torso  : Trunk of the human body
+toucan : Tropical bird
+toward : In the direction of
+tragic : Sorrowful or disastrous
+travel : Journey or trip
+treasu : Valuable possessions or wealth
+tropic : Warm region
+twelve : Number after eleven
+twirl  : Spin or rotate
+uproar : Noisy disturbance
+useful : Practical or functional
+vacuum : Space empty of matter
+vanish : Disappear
+vessel : Container or ship
+violet : Color between blue and red
+virgin : Pure or untouched
+vision : Sight or perception
+vivid  : Bright and lively
+vocal  : Relating to the voice
+volley : Rapid succession
+voyage : Long journey by sea
+walnut : Nut of deciduous tree
+warden : Person in charge
+wealth : Abundance of resources
+weapon : Instrument of warfare
+weasel : Small carnivorous mammal
+wholes : Entirety or completeness
+wicked : Evil or mischievous
+window : Transparent panel
+winner : Victorious person
+wisdom : Knowledge and understanding
+wonder : Cause curiosity
+worthy : Deserving respect
+wrench : Tool for turning bolts
+writer : Author or scribe
+admired : Respected greatly
+analyze : Examine closely
+anxiety : Feeling of unease
+awesome : Impressive
+balance : State of equilibrium
+bizarre : Strange and unusual
+blocked : Obstructed
+blossom : Flowering stage
+boister : Noisy and energetic
+bravery : Courageous behavior
+breathe : Inhale and exhale
+capture : Take into custody
+caravan : Group of travelers
+charity : Generosity
+circles : Round shapes
+citizen : Resident of a place
+clarity : Clearness of thought
+cologne : Fragrant scent
+compass : Navigational tool
+compose : Create or write
+confirm : Verify the truth
+connect : Join together
+control : Command or regulate
+crimson : Deep red color
+crucial : Extremely important
+custody : Legal guardianship
+dazzled : Amazed and impressed
+deceive : Mislead or trick
+density : Compactness
+despair : Hopelessness
+dilemma : Difficult situation
+discuss : Talk about
+dynamic : Energetic and lively
+eloquent : Fluent and persuasive
+emotion : Feeling or sentiment
+erosion : Process of wearing away
+ethanol : Alcohol fuel
+fancier : One who admires
+fashion : Style or trend
+flaming : Burning with flames
+freedom : Liberty
+gallery : Art exhibition space
+genuine : Authentic and real
+glimpse : Brief look
+gravity : Force of attraction
+harmony : Synchronization
+historic : Of historical importance
+implode : Collapse inward
+inhabit : Reside or occupy
+insight : Understanding
+intense : Strong and powerful
+justify : Provide reasoning
+kitchen : Cooking area
+lecture : Formal talk
+liberty : Freedom
+linkage : Connection
+loyalty : Faithfulness
+magnify : Enlarge or amplify
+marvels : Amazing things
+mastery : Expertise and control
+monster : Terrifying creature
+morning : Early part of the day
+natural : Existing in nature
+nebulae : Clouds of gas
+nervous : Anxious or jumpy
+omnibus : Large vehicle
+outward : Going away from center
+overjoy : Delighted
+paradox : Contradictory statement
+passion : Strong emotion
+pathway : Route or trail
+payment : Amount owed
+quality : Level of excellence
+quicken : Accelerate or speed up
+receipt : Document of payment
+reclaim : Retrieve or recover
+reserve : Set aside
+savage : Wild and untamed
+sensual : Relating to the senses
+shimmer : Soft, flickering light
+sincere : Genuine and honest
+slender : Thin and graceful
+soothing : Calming and comforting
+spirits : Essence or mood
+stamina : Endurance
+thought : Mental process
+thrifty : Economical
+tourist : Traveler
+trapped : Caught or confined
+tropical : Warm and humid
+trouble : Difficulty or problem
+unaware : Not conscious of
+uncanny : Strange and mysterious
+variety : Assortment or diversity
+vibrant : Lively and colorful
+whistle : Sound made by blowing
+wounded : Injured or hurt
+yearn : Desire strongly
+adapter : Device connector
+bourbon : Whiskey type
+cheetah : Fastest land animal
+chimney : Fireplace vent
+chocolate : Sweet confection
+conquer : Overcome
+cripple : Disable
+crunchy : Crispy texture
+customer : Buyer
+delivery : Package transport
+diamond : Precious gem
+drizzle : Light rain
+explorer : Adventurer
+franklin : American statesman
+glamour : Attractive charm
+granite : Igneous rock
+handbag : Purse
+handful : Small quantity
+headline : News title
+hilarity : Great amusement
+impound : Confiscate
+inventor : Creator
+lampoon : Satirical piece
+lobster : Marine crustacean
+longing : Strong desire
+machete : Large cutting knife
+majestic : Grand and impressive
+mandate : Official order
+mankind : Human race
+monitor : Observe closely
+moshing : Intense dancing
+mystery : Enigma
+negative : Disapproving
+notebook : Writing pad
+overcome : Triumph over
+overflow : Spill out
+overkill : Excessive force
+painter : Artist
+perfect : Flawless
+phantom : Ghostly apparition
+plumber : Pipe installer
+postage : Shipping cost
+poultry : Domestic birds
+powerful : Strong and potent
+pressure : Force applied
+proposal : Offer to do something
+quietly : In a silent manner
+rainbow : Colorful arc
+rampage : Violent outbreak
+rebound : Bounce back
+sandals : Open-toed footwear
+scandal : Controversy
+silence : Absence of sound
+snooze : Short nap
+snippet : Small piece
+special : Unique
+spinach : Leafy green vegetable
+squalor : Extreme filth
+tadpole : Young frog
+teacup : Small cup for tea
+texture : Feel of a surface
+tractor : Farm vehicle
+turbine : Rotary engine
+twinkle : Sparkle
+ultimate : Final, utmost
+umbrella : Rain protection
+undergo : Experience
+unravel : Solve
+utility : Usefulness
+vaccine : Preventative injection
+victory : Triumph
+vinegar : Sour liquid
+vintage : Old-fashioned
+violent : Forceful
+volcano : Erupting mountain
+voyager : Traveler
+warrior : Fighter
+weather : Atmospheric conditions
+weighted : Having weight
+wrestle : Grapple
+yardstick : Measure
+zealous : Passionate

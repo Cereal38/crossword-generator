@@ -4,8 +4,8 @@ from Class.grid import Grid
 
 
 def main():
-  grid = Grid(10, 10)
-  grid.fill_grid_randomly()
+  grid = Grid(8, 8)
+  grid.generate_grid(5)
   grid.display_cli()
 
 
