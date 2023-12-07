@@ -52,7 +52,7 @@ class Grid():
     # words = dictionary.get_random_words(nb_words)
     # for word in words:
     #   print(word)
-    words = [("HELLO", "A greeting"), ("WORLD", "The world")] #, ("PYTHON", "Blabla"), ("TEST", "blablba")]
+    words = [("HELLO", "A greeting"), ("WORLD", "The world"), ("PYTHON", "Blabla"), ("TEST", "blablba")]
 
     # Create a list to hold variables for each cell in the grid
     # Example: 0_0_0 -> cell in row 0, column 0 is empty
@@ -91,24 +91,26 @@ class Grid():
       # Format constraints
       temp_constraints = []
       for position in positions:
-          # cell_constraints = [cells[i][j][k] for (i, j, k) in position]
-          temp_constraints.append(model.NewBoolVar(f"{word_str}_{position}"))
+          new_bool_var = model.NewBoolVar(f"{word_str}_{position}")
+          temp_constraints.append(new_bool_var)
+          model.AddBoolAnd([cells[i][j][k] for (i, j, k) in position]).OnlyEnforceIf(new_bool_var)
 
-      model.AddBoolXOr(temp_constraints)
+      # XOR constraint
+      model.Add(sum(temp_constraints) == 1)
 
-      for constraint in temp_constraints:
-        model.AddBoolOr([constraint] + [cells[i][j][0] for (i, j, k) in position]).OnlyEnforceIf(constraint)
-        model.AddBoolOr([constraint] + [cells[i][j][k] for (i, j, k) in position]).OnlyEnforceIf(constraint.Not())
+      # for constraint in temp_constraints:
+      #   model.AddBoolOr([constraint] + [cells[i][j][0] for (i, j, k) in position]).OnlyEnforceIf(constraint)
+      #   model.AddBoolOr([constraint] + [cells[i][j][k] for (i, j, k) in position]).OnlyEnforceIf(constraint.Not())
           
   
     # # ============= CONSTRAINT 3 =============
     # # ALL WORDS MUST INTERSECT
     # # We check if :
     # # <Number of letters in the grid> == <Number of letters in all words> - <Number of words> - 1
-    # number_of_letters_in_words = sum([len(word[0]) for word in words])
-    # number_of_words = len(words)
-    # # We check if the number of values different than [i][j][0] is correct
-    # model.Add(sum([sum([sum(cells[i][j][1:]) for j in range(self.columns)]) for i in range(self.rows)]) == number_of_letters_in_words - (number_of_words - 1))
+    number_of_letters_in_words = sum([len(word[0]) for word in words])
+    number_of_words = len(words)
+    # We check if the number of values different than [i][j][0] is correct
+    model.Add(sum([sum([sum(cells[i][j][1:]) for j in range(self.columns)]) for i in range(self.rows)]) == number_of_letters_in_words - (number_of_words - 1))
 
     # # ============= CONSTRAINT 4 =============
     # # WORDS CAN'T BE SIDE BY SIDE
@@ -119,13 +121,13 @@ class Grid():
     # #
     # # For cell 11 we check : NOT( NOT(c[0][1][0]) AND NOT(c[0][2][0]) AND NOT(c[1][2][0]) ) AND ...
     # # It's equal to : ( c[0][1][0] OR c[0][2][0] OR c[1][2][0] ) AND ...
-    # for i in range(1, self.rows - 1):
-    #   for j in range(1, self.columns - 1):
-    #     # Only if the cell contains a letter
-    #     model.AddBoolOr([cells[i-1][j][0], cells[i-1][j+1][0], cells[i][j+1][0]]).OnlyEnforceIf(cells[i][j][0])
-    #     model.AddBoolOr([cells[i][j+1][0], cells[i+1][j+1][0], cells[i+1][j][0]]).OnlyEnforceIf(cells[i][j][0])
-    #     model.AddBoolOr([cells[i][j-1][0], cells[i+1][j-1][0], cells[i+1][j][0]]).OnlyEnforceIf(cells[i][j][0])
-    #     model.AddBoolOr([cells[i-1][j][0], cells[i-1][j-1][0], cells[i][j-1][0]]).OnlyEnforceIf(cells[i][j][0])
+    for i in range(1, self.rows - 1):
+      for j in range(1, self.columns - 1):
+        # Only if the cell contains a letter
+        model.AddBoolOr([cells[i-1][j][0], cells[i-1][j+1][0], cells[i][j+1][0]]).OnlyEnforceIf(cells[i][j][0].Not())
+        model.AddBoolOr([cells[i][j+1][0], cells[i+1][j+1][0], cells[i+1][j][0]]).OnlyEnforceIf(cells[i][j][0].Not())
+        model.AddBoolOr([cells[i][j-1][0], cells[i+1][j-1][0], cells[i+1][j][0]]).OnlyEnforceIf(cells[i][j][0].Not())
+        model.AddBoolOr([cells[i-1][j][0], cells[i-1][j-1][0], cells[i][j-1][0]]).OnlyEnforceIf(cells[i][j][0].Not())
 
     # # ============= CONSTRAINT 5 =============
     # # THE CELL NEXT TO THE END OF A WORD MUST BE EMPTY
@@ -146,7 +148,5 @@ class Grid():
             if solver.Value(cells[i][j][k]) == 1:
               self.grid[i][j].set_letter(letter_int_to_str(k))
               break
-      for i in range(27):
-        print(letter_int_to_str(i), " : ", solver.Value(cells[7][7][i]))
     
     
