@@ -31,7 +31,12 @@ class WordsAdded():
   
   def get_words(self) -> list:
     """Return the list of words already added to the grid"""
-    return sorted(self.words_added, key=lambda x: len(x["word"]))
+    return sorted(self.words, key=lambda x: len(x["word"]))
+
+def pop_longest_word(words: list) -> str:
+  """Pop the longest word from the list"""
+  longest_word = words.pop(words.index(max(words, key=lambda x: len(x[0]))))
+  return longest_word
   
 
 def generate(grid, words: list):
@@ -44,17 +49,12 @@ def generate(grid, words: list):
 
   grid.reset()
 
-  # A list of words already added to the grid
-  # Sorted by length
-  # Format: [ {
-  #   "direction": "horizontal"
-  #   "letters": [
-  #     { "letter": "h", "row": 0, "column": 0 },
-  #     { "letter": "i", "row": 0, "column": 1 },
-  #   ]
-  # }, ... ]
-  words_added = []
+  words_added = WordsAdded()
 
   # Add the longest word to the grid
-  longest_word = words_copy.pop(words_copy.index(max(words_copy, key=lambda x: len(x[0]))))
-  grid.set_word(longest_word[0], 0, 0, rd.choice(["horizontal", "vertical"]))
+  longest_word = pop_longest_word(words_copy)
+  direction = rd.choice(["horizontal", "vertical"])
+  grid.set_word(longest_word[0], 0, 0, direction)
+  words_added.add(longest_word[0], 0, 0, direction)
+
+  print(words_added.get_words())
