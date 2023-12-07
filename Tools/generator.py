@@ -61,6 +61,29 @@ def matching_words(word1: str, word2: dict) -> list:
   
   return matching_letters
 
+def word_can_be_added(word: str, row: int, column: int, direction: str, grid) -> bool:
+  """Check if a word can be added to the grid at the given position and direction"""
+  
+  # Check all concerned cells and see if :
+  # 1 - Theses are empty OR the letter is the same
+  # 2 - 2 words are not "side by side"
+  # 3 - There is one space before and after the word
+
+  cells_to_check = [] # Format: [ { "letter": "a", "row": 0, "column": 0 }, ... ]
+  if direction == "horizontal":
+    cells_to_check = [ { "letter": letter, "row": row, "column": column + i } for i, letter in enumerate(word) ]
+  elif direction == "vertical":
+    cells_to_check = [ { "letter": letter, "row": row + i, "column": column } for i, letter in enumerate(word) ]
+
+  # 1 - Check if the cells are empty or if the letter are the same
+  for cell in cells_to_check:
+    if grid.rows() > cell["row"] + 1 and \
+      grid.columns() > cell["column"] + 1 and \
+      grid.grid[cell["row"]][cell["column"]].get_letter() is not None and \
+      grid.grid[cell["row"]][cell["column"]].get_letter() != cell["letter"]:
+    
+      return False
+
 
 def generate(grid, words: list):
   """Generate the grid with given words"""
@@ -83,14 +106,20 @@ def generate(grid, words: list):
   # Add the other words to the grid
   while len(words_copy) > 0:
     current_word = pop_longest_word(words_copy)
+    print(current_word)
 
     for word in words_added.get_words():
       matching_letters = matching_words(current_word[0], word)
 
       if len(matching_letters) > 0:
-        matching_letter = rd.choice(matching_letters)
-        grid.set_word(current_word[0], matching_letter["row"], matching_letter["column"], "horizontal" if word["direction"] == "vertical" else "vertical")
-        words_added.add(current_word[0], matching_letter["row"], matching_letter["column"], "horizontal" if word["direction"] == "vertical" else "vertical")
-        break
+        for matching_letter in matching_letters:
+          pass
+          direction = word["direction"]
+          if word_can_be_added(current_word[0], matching_letter["row"], matching_letter["column"], direction, grid):
+            grid.set_word(current_word[0], matching_letter["row"], matching_letter["column"], direction)
+            words_added.add(current_word[0], matching_letter["row"], matching_letter["column"], direction)
+            break
+          #   grid.set_word(current_word[0], matching_letter["row"], matching_letter["column"], "horizontal" if word["direction"] == "vertical" else "vertical")
+          #   words_added.add(current_word[0], matching_letter["row"], matching_letter["column"], "horizontal" if word["direction"] == "vertical" else "vertical")
       
 
