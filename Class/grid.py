@@ -14,6 +14,10 @@ class Grid():
   def __init__(self):
     self.grid = []
   
+  def reset(self):
+    """Reset the grid"""
+    self.grid = []
+  
   def rows(self) -> int:
     """Return the number of rows of the grid"""
     return len(self.grid)
@@ -54,6 +58,22 @@ class Grid():
           row.insert(0, Cell())
     else:
       raise ValueError("Position must be 'start' or 'end'")
+  
+  def set_word(self, word: str, row: int, column: int, direction: str):
+    """Set a word in the grid
+    :param word: Word to set
+    :param row: Row id (first letter)
+    :param column: Column if (first letter)
+    :param direction: Direction of the word - "horizontal" or "vertical"
+    """
+    if direction == "horizontal":
+      for i in range(len(word)):
+        self.grid[row][column + i].set_letter(word[i])
+    elif direction == "vertical":
+      for i in range(len(word)):
+        self.grid[row + i][column].set_letter(word[i])
+    else:
+      raise ValueError("Direction must be 'horizontal' or 'vertical'")
 
   def display_cli(self):
     """Display the grid in the command line"""
@@ -74,10 +94,7 @@ class Grid():
     # words = dictionary.get_random_words(nb_words)
     # for word in words:
     #   print(word)
-    words = [("HELLO", "A greeting")]#, ("WORLD", "The world"), ("PYTHON", "Blabla"), ("TEST", "blablba")]
+    words = [("HELLO", "A greeting"), ("WORLD", "The world"), ("PYTHON", "Blabla"), ("TEST", "blablba")]
 
     # Generate the grid
-    grid = generate(words)
-    self.grid = grid
-    self.rows = len(grid)
-    self.columns = len(grid[0])
+    generate(self, words)
