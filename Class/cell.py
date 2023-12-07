@@ -1,8 +1,6 @@
 
-class Box():
-  def __init__(self, row, col):
-    self.row = row
-    self.col = col
+class Cell():
+  def __init__(self):
     self.number = None
     self.letter = None
     self.is_black = False
