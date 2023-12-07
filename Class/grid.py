@@ -48,11 +48,11 @@ class Grid():
     # Get words from the database
     # Format: [(word1, definition1), (word2, definition2), ...]
     # TODO: Remove hardcoding
-    # dictionary = Dictionary()
-    # words = dictionary.get_random_words(nb_words)
-    # for word in words:
-    #   print(word)
-    words = [("HELLO", "A greeting"), ("WORLD", "The world"), ("PYTHON", "Blabla"), ("TEST", "blablba")]
+    dictionary = Dictionary()
+    words = dictionary.get_random_words(nb_words)
+    for word in words:
+      print(word)
+    # words = [("HELLO", "A greeting"), ("WORLD", "The world"), ("PYTHON", "Blabla"), ("TEST", "blablba")]
 
     # Create a list to hold variables for each cell in the grid
     # Example: 0_0_0 -> cell in row 0, column 0 is empty
@@ -107,7 +107,7 @@ class Grid():
           new_bool_var = model.NewBoolVar(f"{word_str}_{position}")
           temp_constraints.append(new_bool_var)
           model.AddBoolAnd([cells[i][j][k] for (i, j, k) in position]).OnlyEnforceIf(new_bool_var)
-
+ 
       # XOR constraint
       model.Add(sum(temp_constraints) == 1)          
   
