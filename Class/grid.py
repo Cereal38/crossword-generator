@@ -61,19 +61,35 @@ class Grid():
   
   def set_word(self, word: str, row: int, column: int, direction: str):
     """Set a word in the grid
+    /!\ The grid automatically grows if the word is too long
     :param word: Word to set
     :param row: Row id (first letter)
     :param column: Column if (first letter)
     :param direction: Direction of the word - "horizontal" or "vertical"
     """
+    # If the word is too long, grow the grid
     if direction == "horizontal":
-      for i in range(len(word)):
-        self.grid[row][column + i].set_letter(word[i])
+      if column + len(word) > self.columns():
+        # If the grid is empty, add a row
+        if self.rows() == 0:
+          self.add_rows()
+        self.add_columns(column + len(word) - self.columns())
     elif direction == "vertical":
-      for i in range(len(word)):
-        self.grid[row + i][column].set_letter(word[i])
+      if row + len(word) > self.rows():
+        self.add_rows(row + len(word) - self.rows())
+        # If the grid was empty, add a column
+        if self.columns() == 0:
+          self.add_columns()
     else:
       raise ValueError("Direction must be 'horizontal' or 'vertical'")
+    
+    # Set the word
+    for i in range(len(word)):
+      if direction == "horizontal":
+        self.grid[row][column + i].set_letter(word[i])
+      elif direction == "vertical":
+        self.grid[row + i][column].set_letter(word[i])
+    
 
   def display_cli(self):
     """Display the grid in the command line"""
