@@ -83,6 +83,8 @@ def word_can_be_added(word: str, row: int, column: int, direction: str, grid) ->
       grid.grid[cell["row"]][cell["column"]].get_letter() != cell["letter"]:
     
       return False
+  
+  return True
 
 
 def generate(grid, words: list):
@@ -110,14 +112,17 @@ def generate(grid, words: list):
 
     for word in words_added.get_words():
       matching_letters = matching_words(current_word[0], word)
+      rd.shuffle(matching_letters)
 
       if len(matching_letters) > 0:
         for matching_letter in matching_letters:
-          pass
+
           direction = word["direction"]
+          anti_direction = "horizontal" if direction == "vertical" else "vertical"
+
           if word_can_be_added(current_word[0], matching_letter["row"], matching_letter["column"], direction, grid):
-            grid.set_word(current_word[0], matching_letter["row"], matching_letter["column"], direction)
-            words_added.add(current_word[0], matching_letter["row"], matching_letter["column"], direction)
+            grid.set_word(current_word[0], matching_letter["row"], matching_letter["column"], anti_direction)
+            words_added.add(current_word[0], matching_letter["row"], matching_letter["column"], anti_direction)
             break
           #   grid.set_word(current_word[0], matching_letter["row"], matching_letter["column"], "horizontal" if word["direction"] == "vertical" else "vertical")
           #   words_added.add(current_word[0], matching_letter["row"], matching_letter["column"], "horizontal" if word["direction"] == "vertical" else "vertical")
