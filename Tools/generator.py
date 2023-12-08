@@ -2,7 +2,7 @@
 import random as rd
 from copy import deepcopy
 
-INITIAL_GRID_SIZE = 100
+INITIAL_GRID_SIZE = 200
 
 
 class WordsAdded():

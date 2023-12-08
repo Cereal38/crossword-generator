@@ -6,7 +6,7 @@ This script allows to generate a crossword puzzle.
 Usage:
 
 ```shell
-./main.py <nb_of_words> <nb_of_row> <nb_of_col>
+./main.py <nb_of_words>
 ```
 
 ### db_client.py
