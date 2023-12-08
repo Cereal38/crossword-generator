@@ -1,10 +1,6 @@
-import random as rd
-
-from ortools.sat.python import cp_model
-
 from Class.cell import Cell
 from Class.dictionary import Dictionary
-from Tools.generator import generate
+from Tools.grid_generator import generate
 
 
 class Grid():
