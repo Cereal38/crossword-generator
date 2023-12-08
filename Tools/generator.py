@@ -76,16 +76,16 @@ def word_can_be_added(word: str, row: int, column: int, direction: str, grid) ->
     cells_to_check = [ { "letter": letter, "row": row, "column": column + i } for i, letter in enumerate(word) ]
   elif direction == "vertical":
     cells_to_check = [ { "letter": letter, "row": row + i, "column": column } for i, letter in enumerate(word) ]
+  
+  print(cells_to_check)
 
   # 1 - Check if the cells are empty or if the letter are the same
   for cell in cells_to_check:
-    if grid.rows() > cell["row"] + 1 and \
-      grid.columns() > cell["column"] + 1 and \
-      grid.grid[cell["row"]][cell["column"]].get_letter() is not None and \
+    if grid.grid[cell["row"]][cell["column"]].get_letter() is not None and \
       grid.grid[cell["row"]][cell["column"]].get_letter() != cell["letter"]:
     
       return False
-  
+
   return True
 
 def reduce_grid(grid):
