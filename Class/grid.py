@@ -29,6 +29,10 @@ class Grid():
     else:
       return 0
   
+  def get_cell(self, row: int, column: int) -> Cell:
+    """Return the cell at the given position"""
+    return self.grid[row][column]
+  
   def add_rows(self, nb_rows: int = 1, position: str = "end"):
     """Add rows to the grid
     :param nb_rows: Number of rows to add (default: 1)
@@ -96,20 +100,6 @@ class Grid():
     :param column: Column if (first letter)
     :param direction: Direction of the word - "horizontal" or "vertical"
     """
-    # # If the word is too long, grow the grid
-    # if direction == "horizontal":
-    #   if column + len(word) > self.columns():
-    #     # If the grid is empty, add a row
-    #     if self.rows() == 0:
-    #       self.add_rows()
-    #     self.add_columns(column + len(word) - self.columns())
-    # elif direction == "vertical":
-    #   if row + len(word) > self.rows():
-    #     self.add_rows(row + len(word) - self.rows())
-    #     # If the grid was empty, add a column
-    #     if self.columns() == 0:
-    #       self.add_columns()
-
     # Set the word
     for i in range(len(word)):
       if direction == "horizontal":

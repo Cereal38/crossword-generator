@@ -77,13 +77,21 @@ def word_can_be_added(word: str, row: int, column: int, direction: str, grid) ->
   elif direction == "vertical":
     cells_to_check = [ { "letter": letter, "row": row + i, "column": column } for i, letter in enumerate(word) ]
   
-  # print(cells_to_check)
-
   # 1 - Check if the cells are empty or if the letter are the same
   for cell in cells_to_check:
-    if grid.grid[cell["row"]][cell["column"]].get_letter() is not None and \
-      grid.grid[cell["row"]][cell["column"]].get_letter() != cell["letter"]:
+    if grid.get_cell(cell["row"], cell["column"]).get_letter() is not None and \
+      grid.get_cell(cell["row"], cell["column"]).get_letter() != cell["letter"]:
       return False
+  
+  # 2 - Check if 2 words are not side by side
+  # Basically, check if a letter is in a "corner" of letters
+  # Example:
+  #   L L         L X
+  #   L X    OR   L L    ...
+  for cell in cells_to_check:
+    pass
+  
+
 
   return True
 
@@ -97,7 +105,7 @@ def reduce_grid(grid):
   # Find all interesting indexes
   for i in range(grid.rows()):
     for j in range(grid.columns()):
-      if grid.grid[i][j].get_letter() is not None:
+      if grid.get_cell(i, j).get_letter() is not None:
         first_row_index = min(first_row_index, i)
         last_row_index = max(last_row_index, i)
         first_col_index = min(first_col_index, j)
