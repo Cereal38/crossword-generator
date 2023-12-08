@@ -3,6 +3,7 @@
 import sys
 
 from Class.grid import Grid
+from Tools.image_generator import generate_crossword_png
 
 
 def main():
@@ -15,6 +16,7 @@ def main():
   grid = Grid()
   grid.generate_grid(nb_words)
   grid.display_cli()
+  generate_crossword_png(grid)
 
 
 if __name__ == "__main__":

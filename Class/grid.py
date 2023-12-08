@@ -127,3 +127,4 @@ class Grid():
 
     # Generate the grid
     generate(self, words)
+
