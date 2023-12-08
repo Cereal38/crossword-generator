@@ -89,7 +89,26 @@ def word_can_be_added(word: str, row: int, column: int, direction: str, grid) ->
   #   L L         L X
   #   L X    OR   L L    ...
   for cell in cells_to_check:
-    pass
+    # Top right corner
+    if grid.get_cell(cell["row"] - 1, cell["column"]).get_letter() is not None and \
+      grid.get_cell(cell["row"] - 1, cell["column"] + 1).get_letter() is not None and \
+      grid.get_cell(cell["row"], cell["column"] + 1).get_letter() is not None:
+      return False
+    # Bottom right corner
+    elif grid.get_cell(cell["row"], cell["column"] + 1).get_letter() is not None and \
+      grid.get_cell(cell["row"] + 1, cell["column"] + 1).get_letter() is not None and \
+      grid.get_cell(cell["row"] + 1, cell["column"]).get_letter() is not None:
+      return False
+    # Bottom left corner
+    elif grid.get_cell(cell["row"] + 1, cell["column"]).get_letter() is not None and \
+      grid.get_cell(cell["row"] + 1, cell["column"] - 1).get_letter() is not None and \
+      grid.get_cell(cell["row"], cell["column"] - 1).get_letter() is not None:
+      return False
+    # Top left corner
+    elif grid.get_cell(cell["row"], cell["column"] - 1).get_letter() is not None and \
+      grid.get_cell(cell["row"] - 1, cell["column"] - 1).get_letter() is not None and \
+      grid.get_cell(cell["row"] - 1, cell["column"]).get_letter() is not None:
+      return False
   
 
 
