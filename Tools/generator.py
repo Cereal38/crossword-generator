@@ -110,6 +110,18 @@ def word_can_be_added(word: str, row: int, column: int, direction: str, grid) ->
       grid.get_cell(cell["row"] - 1, cell["column"]).get_letter() is not None:
       return False
   
+  # 3 - Check if there is one space before and after the word
+  # Check the first letter
+  if direction == "horizontal" and column > 0 and grid.get_cell(row, column - 1).get_letter() is not None:
+    return False
+  elif direction == "vertical" and row > 0 and grid.get_cell(row - 1, column).get_letter() is not None:
+    return False
+  # Check the last letter
+  if direction == "horizontal" and column + len(word) < grid.columns() and grid.get_cell(row, column + len(word)).get_letter() is not None:
+    return False
+  elif direction == "vertical" and row + len(word) < grid.rows() and grid.get_cell(row + len(word), column).get_letter() is not None:
+    return False
+  
 
 
   return True
