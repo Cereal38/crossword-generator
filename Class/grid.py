@@ -117,7 +117,7 @@ class Grid():
         if box.is_black:
           print("■", end=" ")
         elif box.letter is not None:
-          print(box.get_letter(), end=" ")
+          print(box.get_letter().upper(), end=" ")
         else:
           print(" ", end=" ")
       print()
