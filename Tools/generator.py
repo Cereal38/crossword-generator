@@ -77,13 +77,15 @@ def word_can_be_added(word: str, row: int, column: int, direction: str, grid) ->
   elif direction == "vertical":
     cells_to_check = [ { "letter": letter, "row": row + i, "column": column } for i, letter in enumerate(word) ]
   
-  print(cells_to_check)
+  # print(cells_to_check)
 
   # 1 - Check if the cells are empty or if the letter are the same
+  print(f"Cells to check: {cells_to_check}")
   for cell in cells_to_check:
+    print(f"Checking cell {cell['row']}, {cell['column']}")
+    print(f"Letter: {grid.grid[cell['row']][cell['column']].get_letter()}")
     if grid.grid[cell["row"]][cell["column"]].get_letter() is not None and \
       grid.grid[cell["row"]][cell["column"]].get_letter() != cell["letter"]:
-    
       return False
 
   return True
@@ -138,6 +140,8 @@ def generate(grid, words: list):
     # Check each word already added to the grid and "join" the first that match
     for word in words_added.get_words():
       matching_letters = matching_words(current_word[0], word)
+      print("===============================================")
+      print(f"Matching letters for {current_word[0]} and {word['word']}: {matching_letters}")
       rd.shuffle(matching_letters)
 
       # Check if the word can be added to the grid at the matching letter position
@@ -149,7 +153,7 @@ def generate(grid, words: list):
           new_word_row = matching_letter["row"] if new_word_direction == "horizontal" else matching_letter["row"] - matching_letter["index"]
           new_word_column = matching_letter["column"] if new_word_direction == "vertical" else matching_letter["column"] - matching_letter["index"]
 
-          if word_can_be_added(current_word[0], matching_letter["row"], matching_letter["column"], direction, grid):
+          if word_can_be_added(current_word[0], new_word_row, new_word_column, new_word_direction, grid):
             grid.set_word(current_word[0], new_word_row, new_word_column, new_word_direction)
             words_added.add(current_word[0], new_word_row, new_word_column, new_word_direction)
             break
