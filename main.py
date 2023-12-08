@@ -4,8 +4,8 @@ from Class.grid import Grid
 
 
 def main():
-  grid = Grid(8, 8)
-  grid.generate_grid(5)
+  grid = Grid()
+  grid.generate_grid(200)
   grid.display_cli()
 
 
