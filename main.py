@@ -5,7 +5,7 @@ from Class.grid import Grid
 
 def main():
   grid = Grid()
-  grid.generate_grid(50)
+  grid.generate_grid(200)
   grid.display_cli()
 
 
