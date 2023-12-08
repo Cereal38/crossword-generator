@@ -119,17 +119,15 @@ class Grid():
         elif box.letter is not None:
           print(box.get_letter(), end=" ")
         else:
-          print(".", end=" ")
+          print(" ", end=" ")
       print()
   
   def generate_grid(self, nb_words):
     """Generate the grid with random words"""
     
-    # dictionary = Dictionary()
-    # words = dictionary.get_random_words(nb_words)
-    # for word in words:
-    #   print(word)
-    words = [("HELLO", "A greeting"), ("WORLD", "The world"), ("PYTHON", "Blabla"), ("TEST", "blablba")]
+    dictionary = Dictionary()
+    words = dictionary.get_random_words(nb_words)
+    # words = [("HELLO", "A greeting"), ("WORLD", "The world"), ("PYTHON", "Blabla"), ("TEST", "blablba")]
 
     # Generate the grid
     generate(self, words)

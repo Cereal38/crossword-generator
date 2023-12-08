@@ -77,53 +77,42 @@ def word_can_be_added(word: str, row: int, column: int, direction: str, grid) ->
   elif direction == "vertical":
     cells_to_check = [ { "letter": letter, "row": row + i, "column": column } for i, letter in enumerate(word) ]
   
-  # 1 - Check if the cells are empty or if the letter are the same
-  for cell in cells_to_check:
+  for i in range(len(cells_to_check)):
+
+    cell = cells_to_check[i]
+
+    # 1 - Check if the cells are empty or if the letter are the same
     if grid.get_cell(cell["row"], cell["column"]).get_letter() is not None and \
       grid.get_cell(cell["row"], cell["column"]).get_letter() != cell["letter"]:
       return False
-  
-  # 2 - Check if 2 words are not side by side
-  # Basically, check if a letter is in a "corner" of letters
-  # Example:
-  #   L L         L X
-  #   L X    OR   L L    ...
-  for cell in cells_to_check:
-    # Top right corner
-    if grid.get_cell(cell["row"] - 1, cell["column"]).get_letter() is not None and \
-      grid.get_cell(cell["row"] - 1, cell["column"] + 1).get_letter() is not None and \
-      grid.get_cell(cell["row"], cell["column"] + 1).get_letter() is not None:
-      return False
-    # Bottom right corner
-    elif grid.get_cell(cell["row"], cell["column"] + 1).get_letter() is not None and \
-      grid.get_cell(cell["row"] + 1, cell["column"] + 1).get_letter() is not None and \
-      grid.get_cell(cell["row"] + 1, cell["column"]).get_letter() is not None:
-      return False
-    # Bottom left corner
-    elif grid.get_cell(cell["row"] + 1, cell["column"]).get_letter() is not None and \
-      grid.get_cell(cell["row"] + 1, cell["column"] - 1).get_letter() is not None and \
-      grid.get_cell(cell["row"], cell["column"] - 1).get_letter() is not None:
-      return False
-    # Top left corner
-    elif grid.get_cell(cell["row"], cell["column"] - 1).get_letter() is not None and \
-      grid.get_cell(cell["row"] - 1, cell["column"] - 1).get_letter() is not None and \
-      grid.get_cell(cell["row"] - 1, cell["column"]).get_letter() is not None:
-      return False
-  
-  # 3 - Check if there is one space before and after the word
-  # Check the first letter
-  if direction == "horizontal" and column > 0 and grid.get_cell(row, column - 1).get_letter() is not None:
-    return False
-  elif direction == "vertical" and row > 0 and grid.get_cell(row - 1, column).get_letter() is not None:
-    return False
-  # Check the last letter
-  if direction == "horizontal" and column + len(word) < grid.columns() and grid.get_cell(row, column + len(word)).get_letter() is not None:
-    return False
-  elif direction == "vertical" and row + len(word) < grid.rows() and grid.get_cell(row + len(word), column).get_letter() is not None:
-    return False
-  
 
-
+    # 2 - Check if 2 words are not side by side
+    # Basically, check we check if we are about to place a letter next to another letter
+    # Exception: If the letter was already placed we don't check this constraint  
+    if grid.get_cell(cell["row"], cell["column"]).get_letter() != cell["letter"]:
+      if direction == "horizontal":
+        letter_above = grid.get_cell(cell["row"] - 1, cell["column"]).get_letter() is not None
+        letter_below = grid.get_cell(cell["row"] + 1, cell["column"]).get_letter() is not None
+        if letter_above or letter_below:
+          return False
+      elif direction == "vertical":
+        letter_left = grid.get_cell(cell["row"], cell["column"] - 1).get_letter() is not None
+        letter_right = grid.get_cell(cell["row"], cell["column"] + 1).get_letter() is not None
+        if letter_left or letter_right:
+          return False
+  
+    # 3 - Check if there is one space before and after the word
+    # Check the first letter
+    if direction == "horizontal" and column > 0 and grid.get_cell(row, column - 1).get_letter() is not None:
+      return False
+    elif direction == "vertical" and row > 0 and grid.get_cell(row - 1, column).get_letter() is not None:
+      return False
+    # Check the last letter
+    if direction == "horizontal" and column + len(word) < grid.columns() and grid.get_cell(row, column + len(word)).get_letter() is not None:
+      return False
+    elif direction == "vertical" and row + len(word) < grid.rows() and grid.get_cell(row + len(word), column).get_letter() is not None:
+      return False
+  
   return True
 
 def reduce_grid(grid):
