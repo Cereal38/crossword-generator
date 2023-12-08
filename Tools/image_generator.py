@@ -12,8 +12,8 @@ def generate_crossword_png(grid, cell_size=30, line_width=2, file_path="crosswor
     image_width = cols * cell_size
     image_height = rows * cell_size
 
-    # Create a white image
-    img = Image.new("RGB", (image_width, image_height), "white")
+    # Create a transparent image
+    img = Image.new("RGBA", (image_width, image_height), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
 
     # Draw grid lines
@@ -26,7 +26,7 @@ def generate_crossword_png(grid, cell_size=30, line_width=2, file_path="crosswor
     # Draw crossword cells
     for i in range(rows):
         for j in range(cols):
-            if grid.get_cell(i, j) is not None:  # You can customize this condition based on your crossword grid
+            if grid.get_cell(i, j).get_letter() is None:
                 draw.rectangle(
                     [
                         (j * cell_size, i * cell_size),
