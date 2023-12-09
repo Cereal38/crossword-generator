@@ -15,6 +15,7 @@ def help_mode():
     print("  -f, --file: ......... Path to the .txt file containing the words (1)")
     print("  -d, --db: ........... Number of words to get from the database (default: 5)")
     print("  -i, --iterations: ... Number of iterations to get the best crossword puzzle (default: 50)")
+    print("  -o, --out: .......... Path of the output file (default: grid.txt)")
 
     print("\n(1) File format for the --file argument:\n\tword1 : definition1\n\tword2 : definition2\n\t...")
     print("\nNote: You can't use the --file and --db arguments at the same time.")

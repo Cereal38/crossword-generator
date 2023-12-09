@@ -40,6 +40,7 @@ python main.py [args]
 | `-f`, `--file`       | Path to the .txt file containing the words (1)        |               |
 | `-d`, `--db`         | Number of words to get from the database              | 5             |
 | `-i`, `--iterations` | Number of iterations to get the best crossword puzzle | 50            |
+| `-o`, `--out`        | Path of the output file (2)                           | grid.txt      |
 
 (1) File format for the `--file` argument:
 
@@ -47,6 +48,18 @@ python main.py [args]
 word1 : definition1
 word2 : definition2
 ...
+```
+
+(2) File format example for the `--out` argument:
+
+```text
+3x4
+   H
+SAVE
+ S Y
+1:hey:A way to say hello:0:3:v
+2:save:Keep it for later:1:0:h
+3:as:Like that:1:1:v
 ```
 
 Note: You can't use the `--file` and `--db` arguments at the same time.
