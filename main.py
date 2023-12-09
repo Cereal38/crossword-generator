@@ -2,22 +2,146 @@
 
 import sys
 
+from Class.dictionary import Dictionary
 from Class.grid import Grid
-from Tools.image_generator import generate_crossword_png
 
+
+def help_mode():
+    """Show the help message"""
+    print("Usage: python main.py [args]")
+    print("\nExample: python main.py --file:words.txt -i:100")
+    print("\nArguments:")
+    print("  -h, --help: ......... Show the help message")
+    print("  -f, --file: ......... Path to the .txt file containing the words (1)")
+    print("  -d, --db: ........... Number of words to get from the database (default: 5)")
+    print("  -i, --iterations: ... Number of iterations to get the best crossword puzzle (default: 50)")
+    print("  -o, --out: .......... Path of the output file (default: grid.txt)")
+
+    print("\n(1) File format for the --file argument:\n\tword1 : definition1\n\tword2 : definition2\n\t...")
+    print("\nNote: You can't use the --file and --db arguments at the same time.")
+    exit(0)
+
+def file_mode(grid, input_file: str, nb_iterations: int) -> list:
+    """File mode
+    :param input_file: Path to the .txt file containing the words
+    :param nb_iterations: Number of iterations to get the best crossword puzzle
+    """
+    # Load the words from the file
+    words = []
+    with open(input_file, "r") as f:
+        for line in f:
+            word, definition = line.split(":")
+            # Remove spaces
+            word = word.strip()
+            definition = definition.strip()
+            words.append((word, definition))
+
+    grid.generate_grid(words, nb_iterations)
+
+def db_mode(grid, nb_words_db: int, nb_iterations: int) -> None:
+    """Database mode
+    :param nb_words_db: Number of words to get from the database
+    :param nb_iterations: Number of iterations to get the best crossword puzzle
+    """
+    # Get the words from the database
+    dictionary = Dictionary()
+    words = dictionary.get_random_words(nb_words_db)
+
+    grid.generate_grid(words, nb_iterations)
 
 def main():
-  if len(sys.argv) < 2:
-    print("Usage: ./main.py <nb_words>")
-    return
+    
+    # Variables
+    mode = "" # "file" or "db"
+    input_file = ""
+    nb_words_db = 5
+    nb_iterations = 50
+    output_file = "grid.txt"
 
-  nb_words = int(sys.argv[1])
-  
-  grid = Grid()
-  grid.generate_grid(nb_words)
-  grid.display_cli()
-  generate_crossword_png(grid)
+    # Get the arguments
+    args = sys.argv[1:]
+    # Args without the values
+    args_base = [ arg.split(":")[0] for arg in args ]
+
+    # Unrecognized arguments > error
+    allowed_args = ["-h", "--help", "-f", "--file", "-d", "--db", "-i", "--iterations", "-o", "--out"]
+    for arg in args_base:
+        if arg not in allowed_args:
+            print(f"Unrecognized argument: {arg}")
+            exit(1)
+
+    # -h, --help or no arguments
+    if len(args) == 0 or "-h" in args_base or "--help" in args_base:
+        help_mode()
+
+    # -f, --file and -d, --db used at the same time > error
+    if ("-f" in args_base or "--file" in args_base) and ("-d" in args_base or "--db" in args_base):
+        print("You can't use the --file and --db arguments at the same time.")
+        exit(1)
+    
+    # -f, --file
+    if "-f" in args_base or "--file" in args_base:
+        mode = "file"
+        for arg in args:
+            if arg.startswith("-f:"):
+                input_file = arg.split(":")[1]
+            elif arg.startswith("--file:"):
+                input_file = arg.split(":")[1]
+        if input_file == "":
+            print("You must specify a file path")
+            exit(1)
+        # Check if the file exists
+        try:
+            f = open(input_file, "r")
+            f.close()
+        except FileNotFoundError:
+            print(f"File '{input_file}' not found")
+            exit(1)
+    
+    # -d, --db
+    if "-d" in args_base or "--db" in args_base:
+        mode = "db"
+        for arg in args:
+            if arg.startswith("-d:"):
+                nb_words_db = int(arg.split(":")[1])
+            elif arg.startswith("--db:"):
+                nb_words_db = int(arg.split(":")[1])
+        if nb_words_db <= 0:
+            print("The number of words must be greater than 0")
+            exit(1)
+    
+    # -i, --iterations
+    if "-i" in args_base or "--iterations" in args_base:
+        for arg in args:
+            if arg.startswith("-i:"):
+                nb_iterations = int(arg.split(":")[1])
+            elif arg.startswith("--iterations:"):
+                nb_iterations = int(arg.split(":")[1])
+        if nb_iterations <= 0:
+            print("The number of iterations must be greater than 0")
+            exit(1)
+    
+    # -o, --out
+    if "-o" in args_base or "--out" in args_base:
+        for arg in args:
+            if arg.startswith("-o:"):
+                output_file = arg.split(":")[1]
+            elif arg.startswith("--out:"):
+                output_file = arg.split(":")[1]
+        if output_file == "":
+            print("You must specify an output file path")
+            exit(1)
+
+    grid = Grid()
+    
+    if mode == "file":
+        file_mode(grid, input_file, nb_iterations)
+
+    elif mode == "db":
+        db_mode(grid, nb_words_db, nb_iterations)
+
+    grid.save(output_file)
 
 
 if __name__ == "__main__":
-  main()
+    main()

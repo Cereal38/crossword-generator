@@ -52,7 +52,8 @@ def matching_words(word1: str, word2: dict) -> list:
   matching_letters = []
 
   for i, letter in enumerate(word1):
-    for letter2 in word2["letters"]:
+    # Don't check the first letter to avoid 2 words starting in the same cell
+    for letter2 in word2["letters"][1:]:
       if letter == letter2["letter"] and letter2["available"]:
         matching_letters.append({
           "letter": letter,
@@ -137,22 +138,18 @@ def reduce_grid(grid):
   grid.remove_columns(grid.columns() - last_col_index - 1, "end")
   grid.remove_columns(first_col_index, "start")
 
-def add_black_cells(grid):
-  """Add black cells to the grid
-  Black cells are empty cells surrounded by 4 letters
-  """
-  for i in range(grid.rows()):
-    for j in range(grid.columns()):
-      if grid.get_cell(i, j).get_letter() is None:
-        if i > 0 and j > 0 and i < grid.rows() - 1 and j < grid.columns() - 1:
-          if grid.get_cell(i - 1, j).get_letter() is not None and \
-            grid.get_cell(i + 1, j).get_letter() is not None and \
-            grid.get_cell(i, j - 1).get_letter() is not None and \
-            grid.get_cell(i, j + 1).get_letter() is not None:
-            grid.get_cell(i, j).set_black()
+  # Compute the new indexes in the list of associations
+  for i in range(len(grid.get_associations())):
+    association = grid.get_associations()[i]
+    association["row"] -= first_row_index
+    association["column"] -= first_col_index
 
-def generate(grid, words: list):
-  """Generate the grid with given words"""
+def generate(grid, words: list) -> list:
+  """Generate the grid with given words
+  
+  :param grid: Grid object
+  :param words: List of words to add to the grid [(word1, definition1), ...]
+  """
 
   # Algorithm:
   # 1 - Sort the words by length
@@ -175,8 +172,11 @@ def generate(grid, words: list):
   # Add the first word to the grid (at the middle)
   first_word = words_copy.pop(0)
   direction = rd.choice(["horizontal", "vertical"])
-  grid.set_word(first_word[0], INITIAL_GRID_SIZE // 2, INITIAL_GRID_SIZE // 2, direction)
-  words_added.add(first_word[0], INITIAL_GRID_SIZE // 2, INITIAL_GRID_SIZE // 2, direction)
+  row = INITIAL_GRID_SIZE // 2
+  column = INITIAL_GRID_SIZE // 2
+  grid.set_word(first_word[0], row, column, direction, 1)
+  words_added.add(first_word[0], row, column, direction)
+  grid.add_association(1, first_word[0], first_word[1], row, column, direction)
 
 
   # Add the other words to the grid
@@ -218,16 +218,15 @@ def generate(grid, words: list):
             # If the word can be added, add it and break the loop
             can_be_added = word_can_be_added(word_to_add[0], new_word_row, new_word_column, new_word_direction, grid)
             if can_be_added:
-              grid.set_word(word_to_add[0], new_word_row, new_word_column, new_word_direction)
+              grid.set_word(word_to_add[0], new_word_row, new_word_column, new_word_direction, len(words_added.get_words()) + 1)
               words_added.add(word_to_add[0], new_word_row, new_word_column, new_word_direction)
               words_copy.remove(word_to_add)
+              grid.add_association(len(words_added.get_words()), word_to_add[0], word_to_add[1], new_word_row, new_word_column, new_word_direction)
               a_word_had_already_been_added = True
               no_word_can_be_added = False
         
   
   reduce_grid(grid)
-
-  add_black_cells(grid)
 
   grid.set_nb_words(len(words_added.get_words()))
 
