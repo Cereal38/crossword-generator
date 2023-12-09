@@ -140,12 +140,17 @@ class Grid():
     # Or until we reach the maximum number of tries
     temp_grid = Grid()
     optimal_found = False
+    
     while not optimal_found and nb_tries > 0:
       temp_grid.reset()
       generate(temp_grid, words)
       if temp_grid.get_nb_words() == nb_words:
         optimal_found = True
-      if temp_grid.get_nb_words() > self.get_nb_words():
+
+      more_words = temp_grid.get_nb_words() > self.get_nb_words()
+      equal_words = temp_grid.get_nb_words() == self.get_nb_words()
+      smaller_grid = temp_grid.rows() * temp_grid.columns() < self.rows() * self.columns()
+      if more_words or (equal_words and smaller_grid):
         self.grid = temp_grid.grid
         self.set_nb_words(temp_grid.get_nb_words())
       nb_tries -= 1
