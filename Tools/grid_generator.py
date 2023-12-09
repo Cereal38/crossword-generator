@@ -174,7 +174,7 @@ def generate(grid, words: list) -> list:
   direction = rd.choice(["horizontal", "vertical"])
   row = INITIAL_GRID_SIZE // 2
   column = INITIAL_GRID_SIZE // 2
-  grid.set_word(first_word[0], row, column, direction)
+  grid.set_word(first_word[0], row, column, direction, 1)
   words_added.add(first_word[0], row, column, direction)
   grid.add_association(1, first_word[0], first_word[1], row, column, direction)
 
@@ -218,7 +218,7 @@ def generate(grid, words: list) -> list:
             # If the word can be added, add it and break the loop
             can_be_added = word_can_be_added(word_to_add[0], new_word_row, new_word_column, new_word_direction, grid)
             if can_be_added:
-              grid.set_word(word_to_add[0], new_word_row, new_word_column, new_word_direction)
+              grid.set_word(word_to_add[0], new_word_row, new_word_column, new_word_direction, len(words_added.get_words()) + 1)
               words_added.add(word_to_add[0], new_word_row, new_word_column, new_word_direction)
               words_copy.remove(word_to_add)
               grid.add_association(len(words_added.get_words()), word_to_add[0], word_to_add[1], new_word_row, new_word_column, new_word_direction)

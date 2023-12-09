@@ -122,12 +122,13 @@ class Grid():
     else:
       raise ValueError("Position must be 'start' or 'end'")
   
-  def set_word(self, word: str, row: int, column: int, direction: str):
+  def set_word(self, word: str, row: int, column: int, direction: str, number: int):
     """Set a word in the grid
     :param word: Word to set
     :param row: Row id (first letter)
     :param column: Column if (first letter)
     :param direction: Direction of the word - "horizontal" or "vertical"
+    :param number: Number of the word
     """
     # Set the word
     for i in range(len(word)):
@@ -137,6 +138,7 @@ class Grid():
         self.grid[row + i][column].set_letter(word[i])
       else:
         raise ValueError("Direction must be 'horizontal' or 'vertical'")
+    self.grid[row][column].set_number(number)
     
 
   def display_cli(self):
