@@ -26,16 +26,22 @@ class Grid():
     """Return the number of words in the grid"""
     return self.nb_words
   
-  def add_association(self, number: int, word: str, definition: str):
+  def add_association(self, number: int, word: str, definition: str, row: int, column: int, direction: str):
     """Add an association to the list
     :param number: Number of the word
     :param word: Word
     :param definition: Definition of the word
+    :param row: Row id (first letter)
+    :param column: Column id (first letter)
+    :param direction: Direction of the word - "horizontal" or "vertical"
     """
     self.associations.append({
       "number": number,
       "word": word,
-      "definition": definition
+      "definition": definition,
+      "row": row,
+      "column": column,
+      "direction": direction
     })
 
   def get_associations(self) -> list:
@@ -147,19 +153,22 @@ class Grid():
       print()
     print()
     for association in self.get_associations():
-      print(f"{association['number']}. {association['definition']}")
+      print(f"{association['number']}. {association['definition']} ({association['row']}x{association['column']} - {association['direction']})")
   
   def save(self, file_path: str):
     """Save the grid in a text file
 
     Format example:
-    3x4
-          H
-    S A V E
-      S   Y
-    1:hey:A way to say hello:0:3:vertical
-    2:save:Keep it for later:1:0:horizontal
-    3:as:Like that:1:1:vertical
+
+      3x4
+            H
+      S A V E
+        S   Y
+      1:hey:A way to say hello:0:3:v
+      2:save:Keep it for later:1:0:h
+      3:as:Like that:1:1:v
+
+    <number>:<word>:<definition>:<row>:<column>:<direction>
 
     :param file_path: Path of the file
     """
