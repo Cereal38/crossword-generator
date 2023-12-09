@@ -718,7 +718,6 @@ toucan : Tropical bird
 toward : In the direction of
 tragic : Sorrowful or disastrous
 travel : Journey or trip
-treasu : Valuable possessions or wealth
 tropic : Warm region
 twelve : Number after eleven
 twirl  : Spin or rotate
