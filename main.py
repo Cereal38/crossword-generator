@@ -2,6 +2,7 @@
 
 import sys
 
+from Class.dictionary import Dictionary
 from Class.grid import Grid
 
 
@@ -24,9 +25,6 @@ def file_mode(file_path: str, nb_iterations: int):
     :param file_path: Path to the .txt file containing the words
     :param nb_iterations: Number of iterations to get the best crossword puzzle
     """
-    # Create the grid
-    grid = Grid()
-
     pass
 
 def db_mode(nb_words_db: int, nb_iterations: int):
@@ -34,6 +32,12 @@ def db_mode(nb_words_db: int, nb_iterations: int):
     :param nb_words_db: Number of words to get from the database
     :param nb_iterations: Number of iterations to get the best crossword puzzle
     """
+    grid = Grid()
+
+    # Get the words from the database
+    dictionary = Dictionary()
+    words = dictionary.get_random_words(nb_words_db)
+
     pass
 
 def main():
