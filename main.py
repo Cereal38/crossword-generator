@@ -25,6 +25,17 @@ def file_mode(grid, file_path: str, nb_iterations: int) -> None:
     :param file_path: Path to the .txt file containing the words
     :param nb_iterations: Number of iterations to get the best crossword puzzle
     """
+    # Load the words from the file
+    words = []
+    with open(file_path, "r") as f:
+        for line in f:
+            word, definition = line.split(":")
+            # Remove spaces
+            word = word.strip()
+            definition = definition.strip()
+            words.append((word, definition))
+
+    grid.generate_grid(words, nb_iterations)
     
 
 def db_mode(grid, nb_words_db: int, nb_iterations: int) -> None:
