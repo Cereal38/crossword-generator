@@ -165,6 +165,9 @@ def generate(grid, words: list):
   words_copy = deepcopy(words)
   sort_words_by_len(words_copy)
 
+  for word in words_copy:
+    print(word[0])
+
   grid.reset()
   grid.add_rows(INITIAL_GRID_SIZE)
   grid.add_columns(INITIAL_GRID_SIZE)
@@ -172,7 +175,7 @@ def generate(grid, words: list):
   words_added = WordsAdded()
 
   # Add the longest word to the grid (at the middle)
-  longest_word = words_copy.pop()
+  longest_word = words_copy.pop(0)
   direction = rd.choice(["horizontal", "vertical"])
   grid.set_word(longest_word[0], INITIAL_GRID_SIZE // 2, INITIAL_GRID_SIZE // 2, direction)
   words_added.add(longest_word[0], INITIAL_GRID_SIZE // 2, INITIAL_GRID_SIZE // 2, direction)
@@ -184,10 +187,13 @@ def generate(grid, words: list):
 
     no_word_can_be_added = True
 
+    a_word_had_already_been_added = False
+
     # Check each word to add until one can be added
     for word_to_add in words_copy:
-      
-      a_word_had_already_been_added = False
+
+      if a_word_had_already_been_added:
+        break
 
       # Check each word already added to the grid and "join" the first that match
       for word_added in words_added.get_words():
