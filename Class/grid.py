@@ -145,6 +145,25 @@ class Grid():
         else:
           print(" ", end=" ")
       print()
+    print()
+    for association in self.get_associations():
+      print(f"{association['number']}. {association['definition']}")
+  
+  def save(self, file_path: str):
+    """Save the grid in a text file
+
+    Format example:
+    3x4
+          H
+    S A V E
+      S   Y
+    1:hey:A way to say hello:0:3:vertical
+    2:save:Keep it for later:1:0:horizontal
+    3:as:Like that:1:1:vertical
+
+    :param file_path: Path of the file
+    """
+    pass
   
   def generate_grid(self, words: list, nb_iterations: int) -> list:
     """Generate a grid with given words

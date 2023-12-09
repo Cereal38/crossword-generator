@@ -130,9 +130,6 @@ def main():
 
     grid.display_cli()
 
-    for association in grid.get_associations():
-        print(f"{association['number']}. {association['word']}: {association['definition']}")
-
 
 if __name__ == "__main__":
     main()
