@@ -9,10 +9,19 @@ class Grid():
   """
   def __init__(self):
     self.grid = []
+    self.nb_words = 0
   
   def reset(self):
     """Reset the grid"""
     self.grid = []
+
+  def set_nb_words(self, nb_words: int):
+    """Set the number of words in the grid"""
+    self.nb_words = nb_words
+  
+  def get_nb_words(self) -> int:
+    """Return the number of words in the grid"""
+    return self.nb_words
   
   def rows(self) -> int:
     """Return the number of rows of the grid"""
@@ -118,13 +127,27 @@ class Grid():
           print(" ", end=" ")
       print()
   
-  def generate_grid(self, nb_words):
-    """Generate the grid with random words"""
+  def generate_grid(self, nb_words, nb_tries: int = 100):
+    """Generate a grid with random words
+    :param nb_words: Number of words to add to the grid
+    :param nb_tries: Number of tries to generate an optimal grid (default: 100)
+    """
     
     dictionary = Dictionary()
     words = dictionary.get_random_words(nb_words)
-    # words = [("HELLO", "A greeting"), ("WORLD", "The world"), ("PYTHON", "Blabla"), ("TEST", "blablba")]
 
-    # Generate the grid
-    generate(self, words)
+    # Generate grids until we find an optimal one (with all words)
+    # Or until we reach the maximum number of tries
+    temp_grid = Grid()
+    optimal_found = False
+    while not optimal_found and nb_tries > 0:
+      print(f"Try {100 - nb_tries + 1} / 100")
+      temp_grid.reset()
+      generate(temp_grid, words)
+      if temp_grid.get_nb_words() == nb_words:
+        optimal_found = True
+      if temp_grid.get_nb_words() > self.get_nb_words():
+        self.grid = temp_grid.grid
+        self.set_nb_words(temp_grid.get_nb_words())
+      nb_tries -= 1
 
