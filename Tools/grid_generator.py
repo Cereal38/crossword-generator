@@ -21,9 +21,6 @@ class WordsAdded():
     self.words = []
     self.length = 0
   
-  def __len__(self):
-    return self.length
-  
   def add(self, word: str, row: int, column: int, direction: str):
     """Add a word to the list"""
     self.words.append({
@@ -235,5 +232,5 @@ def generate(grid, words: list):
 
   add_black_cells(grid)
 
-  grid.set_nb_words(len(words) - words_added.length)
+  grid.set_nb_words(len(words) - len(words_added.get_words()))
 
