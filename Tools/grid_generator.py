@@ -153,6 +153,12 @@ def add_black_cells(grid):
 def generate(grid, words: list):
   """Generate the grid with given words"""
 
+  # Algorithm:
+  # 1 - Sort the words by length
+  # 2 - Add the longest word to the grid (at the middle)
+  # 3 - Check each word to add and "join" the first that match in the grid
+  # 4 - Repeat step 3 until all words are added or no word can be added during the step 3
+
   if len(words) == 0:
     raise ValueError("Words list must not be empty")
   
@@ -171,44 +177,49 @@ def generate(grid, words: list):
   grid.set_word(longest_word[0], INITIAL_GRID_SIZE // 2, INITIAL_GRID_SIZE // 2, direction)
   words_added.add(longest_word[0], INITIAL_GRID_SIZE // 2, INITIAL_GRID_SIZE // 2, direction)
 
+
   # Add the other words to the grid
-  while len(words_copy) > 0:
+  no_word_can_be_added = False
+  while len(words_copy) > 0 and not no_word_can_be_added:
 
-    current_word = words_copy.pop()
+    no_word_can_be_added = True
 
-    word_added = False
-
-    # Check each word already added to the grid and "join" the first that match
-    for word in words_added.get_words():
-
-      if word_added:
-        break
-
-      matching_letters = matching_words(current_word[0], word)
-      rd.shuffle(matching_letters)
-
-      # Check if the word can be added to the grid at the matching letter position
-      if len(matching_letters) > 0:
-        for matching_letter in matching_letters:
-
-          if word_added:
-            break
-
-          direction = word["direction"]
-          # Get position and direction of the new word
-          new_word_direction = "horizontal" if direction == "vertical" else "vertical"
-          new_word_row = matching_letter["row"] if new_word_direction == "horizontal" else matching_letter["row"] - matching_letter["index"]
-          new_word_column = matching_letter["column"] if new_word_direction == "vertical" else matching_letter["column"] - matching_letter["index"]
-
-          # If the word can be added, add it and break the loop
-          can_be_added = word_can_be_added(current_word[0], new_word_row, new_word_column, new_word_direction, grid)
-          if can_be_added:
-            word_added = True
-            grid.set_word(current_word[0], new_word_row, new_word_column, new_word_direction)
-            words_added.add(current_word[0], new_word_row, new_word_column, new_word_direction)
+    # Check each word to add until one can be added
+    for word_to_add in words_copy:
       
-      # If the word can't be added, add it again to the list (To be inserted in one more iteration)
-      # TODO
+      a_word_had_already_been_added = False
+
+      # Check each word already added to the grid and "join" the first that match
+      for word_added in words_added.get_words():
+
+        if a_word_had_already_been_added:
+          break
+
+        matching_letters = matching_words(word_to_add[0], word_added)
+        rd.shuffle(matching_letters)
+
+        # Check if the word can be added to the grid at the matching letter position
+        if len(matching_letters) > 0:
+          for matching_letter in matching_letters:
+
+            if a_word_had_already_been_added:
+              break
+
+            direction = word_added["direction"]
+            # Get position and direction of the new word
+            new_word_direction = "horizontal" if direction == "vertical" else "vertical"
+            new_word_row = matching_letter["row"] if new_word_direction == "horizontal" else matching_letter["row"] - matching_letter["index"]
+            new_word_column = matching_letter["column"] if new_word_direction == "vertical" else matching_letter["column"] - matching_letter["index"]
+
+            # If the word can be added, add it and break the loop
+            can_be_added = word_can_be_added(word_to_add[0], new_word_row, new_word_column, new_word_direction, grid)
+            if can_be_added:
+              grid.set_word(word_to_add[0], new_word_row, new_word_column, new_word_direction)
+              words_added.add(word_to_add[0], new_word_row, new_word_column, new_word_direction)
+              words_copy.remove(word_to_add)
+              a_word_had_already_been_added = True
+              no_word_can_be_added = False
+        
   
   reduce_grid(grid)
 
