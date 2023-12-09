@@ -127,7 +127,7 @@ class Grid():
           print(" ", end=" ")
       print()
   
-  def generate_grid(self, nb_words, nb_tries: int = 5):
+  def generate_grid(self, nb_words, nb_tries: int = 100):
     """Generate a grid with random words
     :param nb_words: Number of words to add to the grid
     :param nb_tries: Number of tries to generate an optimal grid (default: 100)
@@ -136,9 +136,6 @@ class Grid():
     dictionary = Dictionary()
     words = dictionary.get_random_words(nb_words)
 
-    for word in words:
-      print(word)
-
     # Generate grids until we find an optimal one (with all words)
     # Or until we reach the maximum number of tries
     temp_grid = Grid()
@@ -146,9 +143,6 @@ class Grid():
     while not optimal_found and nb_tries > 0:
       temp_grid.reset()
       generate(temp_grid, words)
-      print(f"========= TRY {nb_tries} =========")
-      temp_grid.display_cli()
-      print(temp_grid.get_nb_words())
       if temp_grid.get_nb_words() == nb_words:
         optimal_found = True
       if temp_grid.get_nb_words() > self.get_nb_words():

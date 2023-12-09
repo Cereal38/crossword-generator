@@ -164,7 +164,7 @@ def generate(grid, words: list):
     raise ValueError("Words list must not be empty")
   
   words_copy = deepcopy(words)
-  sort_words_by_len(words_copy)
+  rd.shuffle(words_copy)
 
   grid.reset()
   grid.add_rows(INITIAL_GRID_SIZE)
@@ -172,11 +172,11 @@ def generate(grid, words: list):
 
   words_added = WordsAdded()
 
-  # Add the longest word to the grid (at the middle)
-  longest_word = words_copy.pop(0)
+  # Add the first word to the grid (at the middle)
+  first_word = words_copy.pop(0)
   direction = rd.choice(["horizontal", "vertical"])
-  grid.set_word(longest_word[0], INITIAL_GRID_SIZE // 2, INITIAL_GRID_SIZE // 2, direction)
-  words_added.add(longest_word[0], INITIAL_GRID_SIZE // 2, INITIAL_GRID_SIZE // 2, direction)
+  grid.set_word(first_word[0], INITIAL_GRID_SIZE // 2, INITIAL_GRID_SIZE // 2, direction)
+  words_added.add(first_word[0], INITIAL_GRID_SIZE // 2, INITIAL_GRID_SIZE // 2, direction)
 
 
   # Add the other words to the grid
