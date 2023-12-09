@@ -3,79 +3,97 @@
 import sys
 
 from Class.grid import Grid
-from Tools.image_generator import generate_crossword_png
 
-# ### main.py
 
-# This script allows to generate a crossword puzzle
+def arg_name(arg: str) -> str:
+    """Return the name of the argument"""
+    return arg.split(":")[0]
 
-# ```shell
-# python main.py [args]
-# ```
+def help():
+    """Show the help message"""
+    print("Usage: python main.py [args]")
+    print("\nExample: python main.py --file:words.txt -i:100")
+    print("\nArguments:")
+    print("  -h, --help: ......... Show the help message")
+    print("  -f, --file: ......... Path to the .txt file containing the words (1)")
+    print("  -d, --db: ........... Number of words to get from the database (default: 5)")
+    print("  -i, --iterations: ... Number of iterations to get the best crossword puzzle (default: 50)")
 
-# #### Arguments
-
-# | Argument             | Description                                           | Default value |
-# | -------------------- | ----------------------------------------------------- | ------------- |
-# | `-h`, `--help`       | Show the help message and exit                        |               |
-# | `-f`, `--file`       | Path to the .txt file containing the words (1)        |               |
-# | `-d`, `--db`         | Number of words to get from the database              | 5             |
-# | `-i`, `--iterations` | Number of iterations to get the best crossword puzzle | 50            |
-
-# (1) File format for the `--file` argument:
-
-# ```text
-# word1 : definition1
-# word2 : definition2
-# ...
-# ```
-
-# Note: You can't use the `--file` and `--db` arguments at the same time.
-# But you have to use one of them.
+    print("\n(1) File format for the --file argument:\n\tword1 : definition1\n\tword2 : definition2\n\t...")
+    print("\nNote: You can't use the --file and --db arguments at the same time.")
+    exit(0)
 
 def main():
-    """Main function"""
+    
+    # Variables
+    mode = "" # "file" or "db"
+    file_path = ""
+    nb_words_db = 5
+    nb_iterations = 50
+
     # Get the arguments
     args = sys.argv[1:]
+    # Args without the values
+    args_base = [ arg_name(arg) for arg in args ]
 
-    if len(args) == 0 or "-h" in args or "--help" in args:
-        print("Usage: python main.py [args]")
-        print("Arguments:")
-        print("  -h, --help: ......... Show the help message")
-        print("  -f, --file: ......... Path to the .txt file containing the words (1)")
-        print("  -d, --db: ........... Number of words to get from the database")
-        print("  -i, --iterations: ... Number of iterations to get the best crossword puzzle")
+    # Unrecognized arguments > error
+    allowed_args = ["-h", "--help", "-f", "--file", "-d", "--db", "-i", "--iterations"]
+    for arg in args_base:
+        if arg not in allowed_args:
+            print(f"Unrecognized argument: {arg}")
+            exit(1)
 
-        print("\n(1) File format for the --file argument:\n\tword1 : definition1\n\tword2 : definition2\n\t...")
-        print("\nNote: You can't use the --file and --db arguments at the same time.")
-        exit(0)
+    # -h, --help or no arguments
+    if len(args) == 0 or "-h" in args_base or "--help" in args_base:
+        help()
 
-    # Get the file path
-    file_path = None
-    if "-f" in args or "--file" in args:
-        file_path = args[args.index("-f") + 1] if "-f" in args else args[args.index("--file") + 1]
-
-    # Get the number of words to get from the database
-    nb_words = 5
-    if "-d" in args or "--db" in args:
-        nb_words = int(args[args.index("-d") + 1] if "-d" in args else args[args.index("--db") + 1])
-
-    # Get the number of iterations
-    nb_iterations = 50
-    if "-i" in args or "--iterations" in args:
-        nb_iterations = int(args[args.index("-i") + 1] if "-i" in args else args[args.index("--iterations") + 1])
-
-    # Check if the file path is given
-    if file_path is None:
-        print("You must specify a file path")
+    # -f, --file and -d, --db used at the same time > error
+    if ("-f" in args_base or "--file" in args_base) and ("-d" in args_base or "--db" in args_base):
+        print("You can't use the --file and --db arguments at the same time.")
         exit(1)
+    
+    # -f, --file
+    if "-f" in args_base or "--file" in args_base:
+        mode = "file"
+        for arg in args:
+            if arg.startswith("-f:"):
+                file_path = arg.split(":")[1]
+            elif arg.startswith("--file:"):
+                file_path = arg.split(":")[1]
+        if file_path == "":
+            print("You must specify a file path")
+            exit(1)
+        # Check if the file exists
+        try:
+            f = open(file_path, "r")
+            f.close()
+        except FileNotFoundError:
+            print(f"File '{file_path}' not found")
+            exit(1)
+    
+    # -d, --db
+    if "-d" in args_base or "--db" in args_base:
+        mode = "db"
+        for arg in args:
+            if arg.startswith("-d:"):
+                nb_words_db = int(arg.split(":")[1])
+            elif arg.startswith("--db:"):
+                nb_words_db = int(arg.split(":")[1])
+        if nb_words_db <= 0:
+            print("The number of words must be greater than 0")
+            exit(1)
+    
+    # -i, --iterations
+    if "-i" in args_base or "--iterations" in args_base:
+        for arg in args:
+            if arg.startswith("-i:"):
+                nb_iterations = int(arg.split(":")[1])
+            elif arg.startswith("--iterations:"):
+                nb_iterations = int(arg.split(":")[1])
+        if nb_iterations <= 0:
+            print("The number of iterations must be greater than 0")
+            exit(1)
 
-    # Create a grid
-    grid = Grid()
-
-    # Generate the grid
-    grid.generate_grid(file_path, nb_words, nb_iterations)
-    grid.display_cli()
 
 if __name__ == "__main__":
     main()
