@@ -52,7 +52,8 @@ def matching_words(word1: str, word2: dict) -> list:
   matching_letters = []
 
   for i, letter in enumerate(word1):
-    for letter2 in word2["letters"]:
+    # Don't check the first letter to avoid 2 words starting in the same cell
+    for letter2 in word2["letters"][1:]:
       if letter == letter2["letter"] and letter2["available"]:
         matching_letters.append({
           "letter": letter,
@@ -151,8 +152,14 @@ def add_black_cells(grid):
             grid.get_cell(i, j + 1).get_letter() is not None:
             grid.get_cell(i, j).set_black()
 
-def generate(grid, words: list):
-  """Generate the grid with given words"""
+def generate(grid, words: list) -> list:
+  """Generate the grid with given words
+  
+  :param grid: Grid object
+  :param words: List of words to add to the grid [(word1, definition1), ...]
+
+  :return: A list of associations between number, words, def - [{"number": 1, "word": "word1", "definition": "definition1"}, ...]
+  """
 
   # Algorithm:
   # 1 - Sort the words by length
