@@ -1,5 +1,4 @@
 from Class.cell import Cell
-from Class.dictionary import Dictionary
 from Tools.grid_generator import generate
 
 
@@ -144,9 +143,7 @@ class Grid():
     """Display the grid in the command line"""
     for row in self.grid:
       for box in row:
-        if box.is_black:
-          print("■", end=" ")
-        elif box.letter is not None:
+        if box.letter is not None:
           print(box.get_letter().upper(), end=" ")
         else:
           print(" ", end=" ")

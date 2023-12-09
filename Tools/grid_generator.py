@@ -144,20 +144,6 @@ def reduce_grid(grid):
     association["row"] -= first_row_index
     association["column"] -= first_col_index
 
-def add_black_cells(grid):
-  """Add black cells to the grid
-  Black cells are empty cells surrounded by 4 letters
-  """
-  for i in range(grid.rows()):
-    for j in range(grid.columns()):
-      if grid.get_cell(i, j).get_letter() is None:
-        if i > 0 and j > 0 and i < grid.rows() - 1 and j < grid.columns() - 1:
-          if grid.get_cell(i - 1, j).get_letter() is not None and \
-            grid.get_cell(i + 1, j).get_letter() is not None and \
-            grid.get_cell(i, j - 1).get_letter() is not None and \
-            grid.get_cell(i, j + 1).get_letter() is not None:
-            grid.get_cell(i, j).set_black()
-
 def generate(grid, words: list) -> list:
   """Generate the grid with given words
   
@@ -241,8 +227,6 @@ def generate(grid, words: list) -> list:
         
   
   reduce_grid(grid)
-
-  add_black_cells(grid)
 
   grid.set_nb_words(len(words_added.get_words()))
 
