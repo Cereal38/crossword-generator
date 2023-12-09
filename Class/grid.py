@@ -127,7 +127,7 @@ class Grid():
           print(" ", end=" ")
       print()
   
-  def generate_grid(self, nb_words, nb_tries: int = 100) -> bool:
+  def generate_grid(self, nb_words, nb_tries: int = 1000) -> bool:
     """Generate a grid with random words
     :param nb_words: Number of words to add to the grid
     :param nb_tries: Number of iterations to generate an optimal grid (default: 100)
