@@ -21,14 +21,14 @@ def help_mode():
     print("\nNote: You can't use the --file and --db arguments at the same time.")
     exit(0)
 
-def file_mode(grid, file_path: str, nb_iterations: int) -> list:
+def file_mode(grid, input_file: str, nb_iterations: int) -> list:
     """File mode
-    :param file_path: Path to the .txt file containing the words
+    :param input_file: Path to the .txt file containing the words
     :param nb_iterations: Number of iterations to get the best crossword puzzle
     """
     # Load the words from the file
     words = []
-    with open(file_path, "r") as f:
+    with open(input_file, "r") as f:
         for line in f:
             word, definition = line.split(":")
             # Remove spaces
@@ -53,9 +53,10 @@ def main():
     
     # Variables
     mode = "" # "file" or "db"
-    file_path = ""
+    input_file = ""
     nb_words_db = 5
     nb_iterations = 50
+    output_file = "grid.txt"
 
     # Get the arguments
     args = sys.argv[1:]
@@ -63,7 +64,7 @@ def main():
     args_base = [ arg.split(":")[0] for arg in args ]
 
     # Unrecognized arguments > error
-    allowed_args = ["-h", "--help", "-f", "--file", "-d", "--db", "-i", "--iterations"]
+    allowed_args = ["-h", "--help", "-f", "--file", "-d", "--db", "-i", "--iterations", "-o", "--out"]
     for arg in args_base:
         if arg not in allowed_args:
             print(f"Unrecognized argument: {arg}")
@@ -83,18 +84,18 @@ def main():
         mode = "file"
         for arg in args:
             if arg.startswith("-f:"):
-                file_path = arg.split(":")[1]
+                input_file = arg.split(":")[1]
             elif arg.startswith("--file:"):
-                file_path = arg.split(":")[1]
-        if file_path == "":
+                input_file = arg.split(":")[1]
+        if input_file == "":
             print("You must specify a file path")
             exit(1)
         # Check if the file exists
         try:
-            f = open(file_path, "r")
+            f = open(input_file, "r")
             f.close()
         except FileNotFoundError:
-            print(f"File '{file_path}' not found")
+            print(f"File '{input_file}' not found")
             exit(1)
     
     # -d, --db
@@ -119,16 +120,27 @@ def main():
         if nb_iterations <= 0:
             print("The number of iterations must be greater than 0")
             exit(1)
+    
+    # -o, --out
+    if "-o" in args_base or "--out" in args_base:
+        for arg in args:
+            if arg.startswith("-o:"):
+                output_file = arg.split(":")[1]
+            elif arg.startswith("--out:"):
+                output_file = arg.split(":")[1]
+        if output_file == "":
+            print("You must specify an output file path")
+            exit(1)
 
     grid = Grid()
     
     if mode == "file":
-        file_mode(grid, file_path, nb_iterations)
+        file_mode(grid, input_file, nb_iterations)
 
     elif mode == "db":
         db_mode(grid, nb_words_db, nb_iterations)
 
-    grid.save()
+    grid.save(output_file)
 
 
 if __name__ == "__main__":
