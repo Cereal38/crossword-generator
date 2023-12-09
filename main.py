@@ -20,25 +20,24 @@ def help_mode():
     print("\nNote: You can't use the --file and --db arguments at the same time.")
     exit(0)
 
-def file_mode(file_path: str, nb_iterations: int):
+def file_mode(grid, file_path: str, nb_iterations: int) -> None:
     """File mode
     :param file_path: Path to the .txt file containing the words
     :param nb_iterations: Number of iterations to get the best crossword puzzle
     """
-    pass
+    
 
-def db_mode(nb_words_db: int, nb_iterations: int):
+def db_mode(grid, nb_words_db: int, nb_iterations: int) -> None:
     """Database mode
     :param nb_words_db: Number of words to get from the database
     :param nb_iterations: Number of iterations to get the best crossword puzzle
     """
-    grid = Grid()
-
     # Get the words from the database
     dictionary = Dictionary()
     words = dictionary.get_random_words(nb_words_db)
 
-    pass
+    grid = Grid()
+    grid.generate_grid(words, nb_iterations)
 
 def main():
     
@@ -110,12 +109,16 @@ def main():
         if nb_iterations <= 0:
             print("The number of iterations must be greater than 0")
             exit(1)
+
+    grid = Grid()
     
     if mode == "file":
-        file_mode(file_path, nb_iterations)
+        file_mode(grid, file_path, nb_iterations)
 
     elif mode == "db":
-        db_mode(nb_words_db, nb_iterations)
+        db_mode(grid, nb_words_db, nb_iterations)
+
+    grid.display_cli()
 
 
 if __name__ == "__main__":
