@@ -15,6 +15,8 @@ class Grid():
   def reset(self):
     """Reset the grid"""
     self.grid = []
+    self.nb_words = 0
+    self.associations = []
 
   def set_nb_words(self, nb_words: int):
     """Set the number of words in the grid"""
@@ -162,4 +164,6 @@ class Grid():
       if more_words or (equal_words and smaller_grid):
         self.grid = temp_grid.grid
         self.set_nb_words(temp_grid.get_nb_words())
+        self.associations = temp_grid.get_associations()
       nb_iterations -= 1
+    
