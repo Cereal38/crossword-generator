@@ -20,7 +20,7 @@ def help_mode():
     print("\nNote: You can't use the --file and --db arguments at the same time.")
     exit(0)
 
-def file_mode(grid, file_path: str, nb_iterations: int) -> None:
+def file_mode(grid, file_path: str, nb_iterations: int) -> list:
     """File mode
     :param file_path: Path to the .txt file containing the words
     :param nb_iterations: Number of iterations to get the best crossword puzzle
@@ -129,6 +129,9 @@ def main():
         db_mode(grid, nb_words_db, nb_iterations)
 
     grid.display_cli()
+
+    for association in grid.get_associations():
+        print(f"{association['number']}. {association['word']}: {association['definition']}")
 
 
 if __name__ == "__main__":

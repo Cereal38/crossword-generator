@@ -10,6 +10,7 @@ class Grid():
   def __init__(self):
     self.grid = []
     self.nb_words = 0
+    self.associations = []
   
   def reset(self):
     """Reset the grid"""
@@ -22,6 +23,22 @@ class Grid():
   def get_nb_words(self) -> int:
     """Return the number of words in the grid"""
     return self.nb_words
+  
+  def add_association(self, number: int, word: str, definition: str):
+    """Add an association to the list
+    :param number: Number of the word
+    :param word: Word
+    :param definition: Definition of the word
+    """
+    self.associations.append({
+      "number": number,
+      "word": word,
+      "definition": definition
+    })
+
+  def get_associations(self) -> list:
+    """Return the list of associations"""
+    return self.associations
   
   def rows(self) -> int:
     """Return the number of rows of the grid"""
@@ -131,8 +148,6 @@ class Grid():
     """Generate a grid with given words
     :param words: List of words to add to the grid - [(word1, definition1), ...]
     :param nb_iterations: Number of iterations to get the best grid
-
-    :return: A list of associations between number, words, def - [{"number": 1, "word": "word1", "definition": "definition1"}, ...]
     """
 
     temp_grid = Grid()
@@ -148,4 +163,3 @@ class Grid():
         self.grid = temp_grid.grid
         self.set_nb_words(temp_grid.get_nb_words())
       nb_iterations -= 1
-

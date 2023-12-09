@@ -157,8 +157,6 @@ def generate(grid, words: list) -> list:
   
   :param grid: Grid object
   :param words: List of words to add to the grid [(word1, definition1), ...]
-
-  :return: A list of associations between number, words, def - [{"number": 1, "word": "word1", "definition": "definition1"}, ...]
   """
 
   # Algorithm:
@@ -184,6 +182,7 @@ def generate(grid, words: list) -> list:
   direction = rd.choice(["horizontal", "vertical"])
   grid.set_word(first_word[0], INITIAL_GRID_SIZE // 2, INITIAL_GRID_SIZE // 2, direction)
   words_added.add(first_word[0], INITIAL_GRID_SIZE // 2, INITIAL_GRID_SIZE // 2, direction)
+  grid.add_association(1, first_word[0], first_word[1])
 
 
   # Add the other words to the grid
@@ -228,6 +227,7 @@ def generate(grid, words: list) -> list:
               grid.set_word(word_to_add[0], new_word_row, new_word_column, new_word_direction)
               words_added.add(word_to_add[0], new_word_row, new_word_column, new_word_direction)
               words_copy.remove(word_to_add)
+              grid.add_association(len(words_added.get_words()), word_to_add[0], word_to_add[1])
               a_word_had_already_been_added = True
               no_word_can_be_added = False
         
