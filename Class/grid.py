@@ -134,7 +134,7 @@ class Grid():
 
     :return: A list of associations between number, words, def - [{"number": 1, "word": "word1", "definition": "definition1"}, ...]
     """
-    
+
     temp_grid = Grid()
     
     for i in range(nb_iterations):
@@ -148,5 +148,4 @@ class Grid():
         self.grid = temp_grid.grid
         self.set_nb_words(temp_grid.get_nb_words())
       nb_iterations -= 1
-    
 

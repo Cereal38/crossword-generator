@@ -36,7 +36,6 @@ def db_mode(grid, nb_words_db: int, nb_iterations: int) -> None:
     dictionary = Dictionary()
     words = dictionary.get_random_words(nb_words_db)
 
-    grid = Grid()
     grid.generate_grid(words, nb_iterations)
 
 def main():
