@@ -154,24 +154,36 @@ class Grid():
     for association in self.get_associations():
       print(f"{association['number']}. {association['definition']} ({association['row']}x{association['column']} - {association['direction']})")
   
-  def save(self, file_path: str):
+  def save(self, file_path: str = "grid.txt"):
     """Save the grid in a text file
 
     Format example:
 
       3x4
-            H
-      S A V E
-        S   Y
+         H
+      SAVE
+       S Y
       1:hey:A way to say hello:0:3:v
       2:save:Keep it for later:1:0:h
       3:as:Like that:1:1:v
 
     <number>:<word>:<definition>:<row>:<column>:<direction>
 
-    :param file_path: Path of the file
+    :param file_path: Path of the output file (default: "grid.txt")
     """
-    pass
+    with open(file_path, "w") as f:
+      f.write(f"{self.rows()}x{self.columns()}\n")
+      for row in self.grid:
+        for box in row:
+          if box.letter is not None:
+            f.write(box.get_letter().upper())
+          else:
+            f.write(" ")
+        f.write("\n")
+      for association in self.get_associations():
+        f.write(f"{association['number']}:{association['word']}:{association['definition']}:{association['row']}:{association['column']}:{association['direction'][:1]}\n")
+
+    
   
   def generate_grid(self, words: list, nb_iterations: int) -> list:
     """Generate a grid with given words

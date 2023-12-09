@@ -1,0 +1,15 @@
+9x7
+  T    
+ THRILL
+  E    
+ TOMATO
+  R  I 
+  Y  M 
+     B 
+THRIVE 
+     R 
+1:theory:Hypothetical explanation:0:2:v
+2:tomato:Red vegetable:3:1:h
+3:timber:Wood used in construction:3:5:v
+4:thrill:Excitement:1:1:h
+5:thrive:Flourish or prosper:7:0:h

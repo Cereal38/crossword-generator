@@ -36,7 +36,6 @@ def file_mode(grid, file_path: str, nb_iterations: int) -> list:
             words.append((word, definition))
 
     grid.generate_grid(words, nb_iterations)
-    
 
 def db_mode(grid, nb_words_db: int, nb_iterations: int) -> None:
     """Database mode
@@ -128,7 +127,7 @@ def main():
     elif mode == "db":
         db_mode(grid, nb_words_db, nb_iterations)
 
-    grid.display_cli()
+    grid.save()
 
 
 if __name__ == "__main__":
