@@ -2,7 +2,7 @@
 import random as rd
 from copy import deepcopy
 
-INITIAL_GRID_SIZE = 200
+INITIAL_GRID_SIZE = 50
 
 
 class WordsAdded():
@@ -175,11 +175,16 @@ def generate(grid, words: list):
   while len(words_copy) > 0:
 
     current_word = pop_longest_word(words_copy)
+    print(current_word[0])
 
     word_added = False
 
     # Check each word already added to the grid and "join" the first that match
     for word in words_added.get_words():
+
+      if word_added:
+        break
+
       matching_letters = matching_words(current_word[0], word)
       rd.shuffle(matching_letters)
 
