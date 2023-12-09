@@ -527,7 +527,6 @@ drawer : Storage compartment
 dreamy : Unreal or imaginative
 drench : Soak completely
 drove  : Herd or group
-eagle  : Bird of prey
 effect : Result or consequence
 effort : Physical or mental endeavor
 elapse : Pass by
@@ -605,7 +604,6 @@ noodle : Long thin pasta
 notion : Idea or belief
 novice : Beginner or learner
 nugget : Small piece or chunk
-oasis  : Fertile spot in a desert
 object : Physical thing
 offend : Cause displeasure
 oliver : Variant of olive
@@ -638,11 +636,9 @@ python : Large snake
 quaint : Attractive or charming
 quarry : Excavation site
 quest  : Search or pursuit
-quote  : Repeat exactly
 rabbit : Small mammal
 radish : Root vegetable
 rarely : Not often
-razor  : Shaving tool
 recess : Break or pause
 record : Document or audio
 refund : Reimbursement
@@ -729,7 +725,6 @@ vessel : Container or ship
 violet : Color between blue and red
 virgin : Pure or untouched
 vision : Sight or perception
-vivid  : Bright and lively
 vocal  : Relating to the voice
 volley : Rapid succession
 voyage : Long journey by sea
