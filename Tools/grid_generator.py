@@ -138,6 +138,12 @@ def reduce_grid(grid):
   grid.remove_columns(grid.columns() - last_col_index - 1, "end")
   grid.remove_columns(first_col_index, "start")
 
+  # Compute the new indexes in the list of associations
+  for i in range(len(grid.get_associations())):
+    association = grid.get_associations()[i]
+    association["row"] -= first_row_index
+    association["column"] -= first_col_index
+
 def add_black_cells(grid):
   """Add black cells to the grid
   Black cells are empty cells surrounded by 4 letters
