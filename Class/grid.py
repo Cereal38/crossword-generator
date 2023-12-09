@@ -1,10 +1,6 @@
-import random as rd
-
-from ortools.sat.python import cp_model
-
 from Class.cell import Cell
 from Class.dictionary import Dictionary
-from Tools.generator import generate
+from Tools.grid_generator import generate
 
 
 class Grid():
@@ -13,10 +9,19 @@ class Grid():
   """
   def __init__(self):
     self.grid = []
+    self.nb_words = 0
   
   def reset(self):
     """Reset the grid"""
     self.grid = []
+
+  def set_nb_words(self, nb_words: int):
+    """Set the number of words in the grid"""
+    self.nb_words = nb_words
+  
+  def get_nb_words(self) -> int:
+    """Return the number of words in the grid"""
+    return self.nb_words
   
   def rows(self) -> int:
     """Return the number of rows of the grid"""
@@ -122,12 +127,31 @@ class Grid():
           print(" ", end=" ")
       print()
   
-  def generate_grid(self, nb_words):
-    """Generate the grid with random words"""
+  def generate_grid(self, nb_words, nb_tries: int = 100) -> bool:
+    """Generate a grid with random words
+    :param nb_words: Number of words to add to the grid
+    :param nb_tries: Number of iterations to generate an optimal grid (default: 100)
+
+    :return: True if the grid contains the given number of words, False otherwise
+    """
     
     dictionary = Dictionary()
     words = dictionary.get_random_words(nb_words)
-    # words = [("HELLO", "A greeting"), ("WORLD", "The world"), ("PYTHON", "Blabla"), ("TEST", "blablba")]
 
-    # Generate the grid
-    generate(self, words)
+    # Generate grids until
+    temp_grid = Grid()
+    
+    for i in range(nb_tries):
+      temp_grid.reset()
+      generate(temp_grid, words)
+
+      more_words = temp_grid.get_nb_words() > self.get_nb_words()
+      equal_words = temp_grid.get_nb_words() == self.get_nb_words()
+      smaller_grid = temp_grid.rows() * temp_grid.columns() < self.rows() * self.columns()
+      if more_words or (equal_words and smaller_grid):
+        self.grid = temp_grid.grid
+        self.set_nb_words(temp_grid.get_nb_words())
+      nb_tries -= 1
+    
+    return self.get_nb_words() == nb_words
+

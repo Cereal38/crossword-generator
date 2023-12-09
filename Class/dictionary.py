@@ -1,5 +1,4 @@
 
-import os
 import sqlite3
 
 
@@ -50,7 +49,10 @@ class Dictionary():
         """
         with open(file_path, "r") as f:
             for line in f:
-                word, definition = line.split(" : ")
+                word, definition = line.split(":")
+                # Remove spaces
+                word = word.strip()
+                definition = definition.strip()
                 self.add_word(word, definition)
     
     def get_random_words(self, number):

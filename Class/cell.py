@@ -5,6 +5,8 @@ class Cell():
     self.letter = None
     self.is_black = False
 
+  # TODO: Allow to set the number of the word
+  # /!\ 2 words can start at the same cell
   def set_number(self, number):
     self.number = number
 

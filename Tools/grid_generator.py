@@ -2,7 +2,7 @@
 import random as rd
 from copy import deepcopy
 
-INITIAL_GRID_SIZE = 100
+INITIAL_GRID_SIZE = 50
 
 
 class WordsAdded():
@@ -19,6 +19,7 @@ class WordsAdded():
   """
   def __init__(self):
     self.words = []
+    self.length = 0
   
   def add(self, word: str, row: int, column: int, direction: str):
     """Add a word to the list"""
@@ -36,10 +37,9 @@ class WordsAdded():
     """Return the list of words already added to the grid"""
     return sorted(self.words, key=lambda x: len(x["word"]))
 
-def pop_longest_word(words: list) -> str:
-  """Pop the longest word from the list"""
-  longest_word = words.pop(words.index(max(words, key=lambda x: len(x[0]))))
-  return longest_word
+def sort_words_by_len(words: list) -> None:
+  """Sort a list of words by length"""
+  words.sort(key=lambda x: len(x[0]), reverse=True)
 
 def matching_words(word1: str, word2: dict) -> list:
   """Check if two words can be matched.
@@ -154,10 +154,17 @@ def add_black_cells(grid):
 def generate(grid, words: list):
   """Generate the grid with given words"""
 
+  # Algorithm:
+  # 1 - Sort the words by length
+  # 2 - Add the longest word to the grid (at the middle)
+  # 3 - Check each word to add and "join" the first that match in the grid
+  # 4 - Repeat step 3 until all words are added or no word can be added during the step 3
+
   if len(words) == 0:
     raise ValueError("Words list must not be empty")
   
   words_copy = deepcopy(words)
+  rd.shuffle(words_copy)
 
   grid.reset()
   grid.add_rows(INITIAL_GRID_SIZE)
@@ -165,45 +172,62 @@ def generate(grid, words: list):
 
   words_added = WordsAdded()
 
-  # Add the longest word to the grid (at the middle)
-  longest_word = pop_longest_word(words_copy)
+  # Add the first word to the grid (at the middle)
+  first_word = words_copy.pop(0)
   direction = rd.choice(["horizontal", "vertical"])
-  grid.set_word(longest_word[0], INITIAL_GRID_SIZE // 2, INITIAL_GRID_SIZE // 2, direction)
-  words_added.add(longest_word[0], INITIAL_GRID_SIZE // 2, INITIAL_GRID_SIZE // 2, direction)
+  grid.set_word(first_word[0], INITIAL_GRID_SIZE // 2, INITIAL_GRID_SIZE // 2, direction)
+  words_added.add(first_word[0], INITIAL_GRID_SIZE // 2, INITIAL_GRID_SIZE // 2, direction)
+
 
   # Add the other words to the grid
-  while len(words_copy) > 0:
+  no_word_can_be_added = False
+  while len(words_copy) > 0 and not no_word_can_be_added:
 
-    current_word = pop_longest_word(words_copy)
+    no_word_can_be_added = True
 
-    word_added = False
+    a_word_had_already_been_added = False
 
-    # Check each word already added to the grid and "join" the first that match
-    for word in words_added.get_words():
-      matching_letters = matching_words(current_word[0], word)
-      rd.shuffle(matching_letters)
+    # Check each word to add until one can be added
+    for word_to_add in words_copy:
 
-      # Check if the word can be added to the grid at the matching letter position
-      if len(matching_letters) > 0:
-        for matching_letter in matching_letters:
+      if a_word_had_already_been_added:
+        break
 
-          if word_added:
-            break
+      # Check each word already added to the grid and "join" the first that match
+      for word_added in words_added.get_words():
 
-          direction = word["direction"]
-          # Get position and direction of the new word
-          new_word_direction = "horizontal" if direction == "vertical" else "vertical"
-          new_word_row = matching_letter["row"] if new_word_direction == "horizontal" else matching_letter["row"] - matching_letter["index"]
-          new_word_column = matching_letter["column"] if new_word_direction == "vertical" else matching_letter["column"] - matching_letter["index"]
+        if a_word_had_already_been_added:
+          break
 
-          # If the word can be added, add it and break the loop
-          can_be_added = word_can_be_added(current_word[0], new_word_row, new_word_column, new_word_direction, grid)
-          if can_be_added:
-            word_added = True
-            grid.set_word(current_word[0], new_word_row, new_word_column, new_word_direction)
-            words_added.add(current_word[0], new_word_row, new_word_column, new_word_direction)
+        matching_letters = matching_words(word_to_add[0], word_added)
+        rd.shuffle(matching_letters)
+
+        # Check if the word can be added to the grid at the matching letter position
+        if len(matching_letters) > 0:
+          for matching_letter in matching_letters:
+
+            if a_word_had_already_been_added:
+              break
+
+            direction = word_added["direction"]
+            # Get position and direction of the new word
+            new_word_direction = "horizontal" if direction == "vertical" else "vertical"
+            new_word_row = matching_letter["row"] if new_word_direction == "horizontal" else matching_letter["row"] - matching_letter["index"]
+            new_word_column = matching_letter["column"] if new_word_direction == "vertical" else matching_letter["column"] - matching_letter["index"]
+
+            # If the word can be added, add it and break the loop
+            can_be_added = word_can_be_added(word_to_add[0], new_word_row, new_word_column, new_word_direction, grid)
+            if can_be_added:
+              grid.set_word(word_to_add[0], new_word_row, new_word_column, new_word_direction)
+              words_added.add(word_to_add[0], new_word_row, new_word_column, new_word_direction)
+              words_copy.remove(word_to_add)
+              a_word_had_already_been_added = True
+              no_word_can_be_added = False
+        
   
   reduce_grid(grid)
 
   add_black_cells(grid)
+
+  grid.set_nb_words(len(words_added.get_words()))
 
