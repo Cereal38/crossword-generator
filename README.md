@@ -72,3 +72,5 @@ This script allows to interact with the database.
 ```shell
 python db_client.py
 ```
+
+A database containing about 900 words and definitions comes with the project.
