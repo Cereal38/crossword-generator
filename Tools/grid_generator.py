@@ -166,9 +166,6 @@ def generate(grid, words: list):
   words_copy = deepcopy(words)
   sort_words_by_len(words_copy)
 
-  for word in words_copy:
-    print(word[0])
-
   grid.reset()
   grid.add_rows(INITIAL_GRID_SIZE)
   grid.add_columns(INITIAL_GRID_SIZE)
@@ -232,5 +229,5 @@ def generate(grid, words: list):
 
   add_black_cells(grid)
 
-  grid.set_nb_words(len(words) - len(words_added.get_words()))
+  grid.set_nb_words(len(words_added.get_words()))
 
