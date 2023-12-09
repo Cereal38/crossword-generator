@@ -5,11 +5,7 @@ import sys
 from Class.grid import Grid
 
 
-def arg_name(arg: str) -> str:
-    """Return the name of the argument"""
-    return arg.split(":")[0]
-
-def help():
+def help_mode():
     """Show the help message"""
     print("Usage: python main.py [args]")
     print("\nExample: python main.py --file:words.txt -i:100")
@@ -23,6 +19,23 @@ def help():
     print("\nNote: You can't use the --file and --db arguments at the same time.")
     exit(0)
 
+def file_mode(file_path: str, nb_iterations: int):
+    """File mode
+    :param file_path: Path to the .txt file containing the words
+    :param nb_iterations: Number of iterations to get the best crossword puzzle
+    """
+    # Create the grid
+    grid = Grid()
+
+    pass
+
+def db_mode(nb_words_db: int, nb_iterations: int):
+    """Database mode
+    :param nb_words_db: Number of words to get from the database
+    :param nb_iterations: Number of iterations to get the best crossword puzzle
+    """
+    pass
+
 def main():
     
     # Variables
@@ -34,7 +47,7 @@ def main():
     # Get the arguments
     args = sys.argv[1:]
     # Args without the values
-    args_base = [ arg_name(arg) for arg in args ]
+    args_base = [ arg.split(":")[0] for arg in args ]
 
     # Unrecognized arguments > error
     allowed_args = ["-h", "--help", "-f", "--file", "-d", "--db", "-i", "--iterations"]
@@ -45,7 +58,7 @@ def main():
 
     # -h, --help or no arguments
     if len(args) == 0 or "-h" in args_base or "--help" in args_base:
-        help()
+        help_mode()
 
     # -f, --file and -d, --db used at the same time > error
     if ("-f" in args_base or "--file" in args_base) and ("-d" in args_base or "--db" in args_base):
@@ -93,6 +106,12 @@ def main():
         if nb_iterations <= 0:
             print("The number of iterations must be greater than 0")
             exit(1)
+    
+    if mode == "file":
+        file_mode(file_path, nb_iterations)
+
+    elif mode == "db":
+        db_mode(nb_words_db, nb_iterations)
 
 
 if __name__ == "__main__":
